@@ -1,7 +1,9 @@
+""" Unit tests for User Model """
+
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 
-from .models import User
+from microblogs.models import User
 
 # Create your tests here.
 class UserModelTestCase(TestCase):
