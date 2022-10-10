@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Clucker</title>
+</head>
+
+<body>
+    <h1>Signup</h1>
+
+    <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+           {{ form.as_p }}
+        <input type="submit" value="Sign up">
+    </form
+
+    <p><a href=#>Login</a></p>
+
+</body>
+
+</html>
