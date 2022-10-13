@@ -2,7 +2,7 @@ from contextlib import redirect_stderr
 from django.shortcuts import render, redirect
 
 from .models import User
-from .forms import SignUpForm
+from .forms import LogInForm, SignUpForm
 
 # Create your views here.
 def home(request):
@@ -20,7 +20,8 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 def login(request):
-    return render(request, 'login.html')
+    form = LogInForm()
+    return render(request, 'login.html', {'form': form})
 
 def feed(request):
     return render(request, 'feed.html')
