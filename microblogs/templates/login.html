@@ -6,6 +6,10 @@
 <body>
     <h1>Login</h1>
 
+    {% for message in messages %}
+    <p><strong> {{ message }} </strong></p>
+    {% endfor %}
+
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
            {{ form.as_p }}

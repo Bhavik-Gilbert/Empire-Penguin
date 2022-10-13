@@ -1,7 +1,6 @@
-from contextlib import redirect_stderr
-from urllib.request import Request
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 from .models import User
 from .forms import LogInForm, SignUpForm
@@ -35,6 +34,9 @@ def log_in(request):
             if user is not None:
                 login(request, user)
                 return redirect('feed')
+
+        # Add error messages
+        messages.add_message(request, messages.ERROR, "The username or passsword is incorrect") 
 
     form = LogInForm()
     return render(request, 'login.html', {'form': form})

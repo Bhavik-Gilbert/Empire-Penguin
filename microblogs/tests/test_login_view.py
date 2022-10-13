@@ -1,5 +1,5 @@
 """Tests of the login view"""
-from audioop import reverse
+from django.contrib import messages
 from django.test import TestCase
 from django.urls import reverse
 
@@ -42,6 +42,9 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertTrue(isinstance(form, LogInForm))
         self.assertFalse(form.is_bound)
         self.assertFalse(self._is_logged_in())
+        message = list(response.context['messages'])
+        self.assertEqual(1, len(message))
+        self.assertEqual(message[0].level, messages.ERROR)
 
     def test_successul_login(self):
         form_input = {'username': '@janedoe', 'password': 'Password123'}
@@ -50,6 +53,8 @@ class LogInViewTestCase(TestCase, LogInTester):
         response_url = reverse('feed')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
         self.assertTemplateUsed(response, 'feed.html')
+        message = list(response.context['messages'])
+        self.assertEqual(0, len(message))
 
     def test_valid_login_by_inactive_user(self):
         self.user.is_active = False
@@ -62,3 +67,6 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertTrue(isinstance(form, LogInForm))
         self.assertFalse(form.is_bound)
         self.assertFalse(self._is_logged_in())
+        message = list(response.context['messages'])
+        self.assertEqual(1, len(message))
+        self.assertEqual(message[0].level, messages.ERROR)
