@@ -32,7 +32,7 @@ class SignupViewTestCase(TestCase):
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertFalse(form.is_bound)
 
-    def test_unsucessful_signup(self):
+    def test_unsuccesful_signup(self):
         self.form_input['username'] = 'BAD_USERNAME'
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input)
@@ -44,7 +44,7 @@ class SignupViewTestCase(TestCase):
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertTrue(form.is_bound)
     
-    def test_sucessful_signup(self):
+    def test_succesful_signup(self):
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input, follow=True)
         after_count = User.objects.count()
