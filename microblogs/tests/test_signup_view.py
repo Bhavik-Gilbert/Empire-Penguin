@@ -6,8 +6,9 @@ from django.contrib.auth.hashers import check_password
 
 from microblogs.models import User
 from microblogs.forms import SignUpForm
+from .helpers import LogInTester
 
-class SignupViewTestCase(TestCase):
+class SignupViewTestCase(TestCase, LogInTester):
 
     def setUp(self):
         self.url = reverse('signup')
@@ -32,7 +33,7 @@ class SignupViewTestCase(TestCase):
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertFalse(form.is_bound)
 
-    def test_unsuccesful_signup(self):
+    def test_unsuccessful_signup(self):
         self.form_input['username'] = 'BAD_USERNAME'
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input)
@@ -43,8 +44,9 @@ class SignupViewTestCase(TestCase):
         form = response.context['form']
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertTrue(form.is_bound)
+        self.assertFalse(self._is_logged_in())
     
-    def test_succesful_signup(self):
+    def test_successful_signup(self):
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input, follow=True)
         after_count = User.objects.count()
@@ -59,3 +61,4 @@ class SignupViewTestCase(TestCase):
         self.assertEqual(user.bio, 'hi')
         is_password_correct = check_password('Password123', user.password)
         self.assertTrue(is_password_correct)
+        self.assertTrue(self._is_logged_in())
