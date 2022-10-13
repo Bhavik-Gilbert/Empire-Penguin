@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -40,6 +40,10 @@ def log_in(request):
 
     form = LogInForm()
     return render(request, 'login.html', {'form': form})
+
+def log_out(request):
+    logout(request)
+    return redirect('home')
 
 def feed(request):
     return render(request, 'feed.html')
