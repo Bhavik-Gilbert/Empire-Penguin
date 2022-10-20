@@ -1,13 +1,10 @@
-<html>
-<head>
-    <title>Feed</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block body %}
+<div class="clucker-box">
     <h1>Welcome to Clucker</h1>
     <p>The place for free range coversation</p>
-    
-    <p><a href='{% url 'logout' %}'>Logout</a></p>
-</body>
 
-</html>
+    <a href='{% url 'logout' %}' class="btn btn-sm btn-light btn-outline-primary">Logout</a>
+</div>
+{% endblock %}

@@ -1,27 +1,11 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block body %}
+<div class="clucker-box">
+  <h1>Welcome to Clucker</h1>
+  <p>The place for free range coversation</p>
 
-    <link href="{% static 'style.css' %}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Clucker</title>
-  </head>
-  <body class="page">
-    <div class="clucker-box">
-      <h1>Welcome to Clucker</h1>
-      <p>The place for free range coversation</p>
-
-      <a href='{% url 'signup' %}' class="btn btn-sm btn-light btn-outline-primary">Sign up</a>
-      <a href='{% url 'login' %}' class="btn btn-sm btn-light btn-outline-primary">Login</a>
-    </div>
-    
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-  </body>
-</html>
+  <a href='{% url 'signup' %}' class="btn btn-sm btn-light btn-outline-primary">Sign up</a>
+  <a href='{% url 'login' %}' class="btn btn-sm btn-light btn-outline-primary">Login</a>
+</div>
+{% endblock %}

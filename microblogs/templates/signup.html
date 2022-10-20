@@ -1,19 +1,12 @@
-<html>
-<head>
-    <title>Clucker</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <h1>Signup</h1>
+{% block body %}
+    <form  form action="{% url 'login' %}" method="post" class="clucker-box">
+        <h1>Signup</h1>
 
-    <form action="{% url 'signup' %}" method="post">
         {% csrf_token %}
            {{ form.as_p }}
-        <input type="submit" value="Sign up">
+        <input type="submit" value="Sign up" class="btn btn-sm btn-light btn-outline-dark">
+        <a href='{% url 'login' %}' class="btn btn-sm btn-light btn-outline-primary">Login</a>
     </form>
-
-    <p><a href='{% url 'login' %}'>Login</a></p>
-
-</body>
-
-</html>
+{% endblock %}

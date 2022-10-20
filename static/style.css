@@ -24,3 +24,8 @@ h1, p {color: var(--white)}
     box-shadow: var(--secondary) 0px 20px 30px -10px;
     border-radius: 1em;
 }
+
+.error_message {
+    color: red;
+    padding: 2vh 0 2vh 0;
+}
