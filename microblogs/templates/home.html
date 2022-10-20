@@ -1,26 +1,23 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
+    <link href="{% static 'style.css' %}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Clucker</title>
   </head>
-  <body>
-    <div class="container vh-100">
-        <div class="row">
-            <div class="col-12">
-                <h1>Welcome to Clucker</h1>
-                <p>The place for free range coversation</p>
+  <body class="page">
+    <div class="clucker-box">
+      <h1>Welcome to Clucker</h1>
+      <p>The place for free range coversation</p>
 
-                <p><a href='{% url 'signup' %}' class="btn btn-sm btn-light btn-outline-primary">Sign up</a></p>
-                <p><a href='{% url 'login' %}' class="btn btn-sm btn-light btn-outline-primary">Login</a></p>
-                </div>
-        </div>
+      <a href='{% url 'signup' %}' class="btn btn-sm btn-light btn-outline-primary">Sign up</a>
+      <a href='{% url 'login' %}' class="btn btn-sm btn-light btn-outline-primary">Login</a>
     </div>
     
 

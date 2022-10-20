@@ -1,0 +1,26 @@
+html {
+    --primary:#D4EAA7;
+    --secondary: #008080;
+
+    --white: #fff;
+    --black: #000;
+}
+
+.page {
+    background-color : var(--secondary);
+    background-image: url("images/chicken_background.png");
+    background-repeat: repeat;
+    padding: 4vh 4vw;
+}
+
+h1, p {color: var(--white)}
+
+.clucker-box {
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 1em;
+    background-color: var(--secondary);
+    box-shadow: var(--secondary) 0px 20px 30px -10px;
+    border-radius: 1em;
+}
