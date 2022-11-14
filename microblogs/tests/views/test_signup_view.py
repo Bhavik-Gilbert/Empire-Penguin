@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password
 
 from microblogs.models import User
 from microblogs.forms import SignUpForm
-from .helpers import LogInTester
+from ..helpers import LogInTester
 
 class SignupViewTestCase(TestCase, LogInTester):
 

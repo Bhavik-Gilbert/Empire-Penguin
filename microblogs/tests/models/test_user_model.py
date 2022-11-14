@@ -7,16 +7,15 @@ from microblogs.models import User
 
 # Create your tests here.
 class UserModelTestCase(TestCase):
+    fixtures = [
+        'microblogs/tests/fixtures/default_user.json',
+        'microblogs/tests/fixtures/other_users.json'
+    ]
+
     # Setup code run before every test
     def setUp(self):
-        self.user = User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='hi'
-        )
+        self.user = User.objects.get(username="@janedoe")
+
 
     def test_valid_user(self):
         self._assert_user_is_valid()
@@ -34,15 +33,8 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_username_must_be_unqiue(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='jaendoe@example.org',
-            password='Password123',
-            bio='hi'
-        )
-        self.user.username = '@janedoe'
+        user = User.objects.get(username="@johndoe")
+        self.user.username = '@johndoe'
         self._assert_user_is_invalid()
     
     def test_username_must_start_with_at_symbol(self):
@@ -70,14 +62,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_firstname_may_aleady_exist(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='jaendoe@example.org',
-            password='Password123',
-            bio='hi'
-        )
+        user = User.objects.get(username="@johndoe")
         self.user.first_name = 'Jane'
         self._assert_user_is_valid()
     
@@ -94,14 +79,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_lastname_may_aleady_exist(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio='hi'
-        )
+        user = User.objects.get(username="@johndoe")
         self.user.last_name = 'Doe'
         self._assert_user_is_valid()
     
@@ -114,15 +92,8 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
     
     def test_email_must_be_unique(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio='hi'
-        )
-        self.user.email='janedoe@example.org'
+        user = User.objects.get(username="@johndoe")
+        self.user.email ='johndoe@example.org'
         self._assert_user_is_invalid()
 
     def test_email_cannot_be_blank(self):
@@ -142,14 +113,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_valid()
 
     def test_bio_may_already_exist(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio='hi'
-        )
+        user = User.objects.get(username="@johndoe")
         self.user.bio='hi'
         self._assert_user_is_valid()
     

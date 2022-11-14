@@ -4,21 +4,15 @@ from django.test import TestCase
 from django.urls import reverse
 
 from microblogs.models import User
-from .helpers import LogInTester
+from ..helpers import LogInTester
 
 class LogOutViewTestCase(TestCase, LogInTester):
 
+    fixtures = ['microblogs/tests/fixtures/default_user.json']
+
     def setUp(self):
         self.url = reverse('logout')
-        self.user = User.objects.create_user(
-            first_name ='Jane',
-            last_name ='Doe',
-            username = '@janedoe',
-            email = 'janedoe@example.org',
-            bio ='hi',
-            password = 'Password123',
-            is_active = True
-        )
+        self.user = User.objects.get(username="@janedoe")
 
     def test_logout_url(self):
         self.assertEqual(self.url, '/logout/')
