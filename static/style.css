@@ -6,6 +6,49 @@ html {
     --black: #000;
 }
 
+/* Navbar */
+.navbar {
+    width: 100vw;
+    transform: translate3d(-4.2em, -2.5em, 0);
+    background-color: var(--secondary);
+    z-index: 100;
+}
+
+.navbar .nav ul {
+    list-style-type: none;
+    margin: 0 0 0.4em 0;
+    height: fit-content;
+}
+
+.navbar .nav ul li {
+    height: 100%;
+    transition: all ease 0.5s;
+    padding: 1em 1.5em;
+    display: inline;
+}
+.navbar .nav ul li:hover {
+    background-color: var(--white);
+}
+
+.navbar .nav ul li a {
+    transition: all ease 0.5s;
+    color: var(--white);
+    text-decoration: none;
+}
+.navbar .nav ul li:hover a {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.navbar #dropdown {
+    margin-right: 1em;
+}
+.navbar #dropdown button{
+    background-color: var(--black);
+    border:none;
+}
+/* Page */
+
 body {
     background-color : var(--secondary);
     background-image: url("images/penguin_background.png");
