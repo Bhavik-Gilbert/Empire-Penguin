@@ -5,6 +5,7 @@
         <h1>Login</h1>
         
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
         {% include 'partials/bootstrap_form.html' with form=form %}
         <input type="submit" value="Login" class="btn btn-sm btn-light btn-outline-dark">
         <a href="{% url 'signup' %}" class="btn btn-sm btn-light btn-outline-primary">Sign up</a>

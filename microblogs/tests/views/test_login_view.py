@@ -2,6 +2,7 @@
 from django.contrib import messages
 from django.test import TestCase
 from django.urls import reverse
+from microblogs.tests.helpers import reverse_with_next
 
 
 from microblogs.models import User
@@ -24,8 +25,33 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
         form = response.context['form']
+
+        # for next redirect element
+        next = response.context['next']
+
         self.assertTrue(isinstance(form, LogInForm))
         self.assertFalse(form.is_bound)
+        self.assertFalse(next)
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 0)
+    
+    def test_get_login_with_redirect(self):
+        # dummy redirect
+        destination_url = reverse('feed')
+        self.url = reverse_with_next('login', destination_url)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html')
+        form = response.context['form']
+
+        # for next redirect element
+        next = response.context['next']
+
+        self.assertTrue(isinstance(form, LogInForm))
+        self.assertFalse(form.is_bound)
+        self.assertEqual(next, destination_url)
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 0)
 
     def test_unsuccessful_login(self):
         form_input = {'username': '@johndoe', 'password': 'WRONGPASSWORD'}
@@ -72,6 +98,16 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertTrue(self._is_logged_in())
         response_url = reverse('feed')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
+        self.assertTemplateUsed(response, 'feed.html')
+        message = list(response.context['messages'])
+        self.assertEqual(0, len(message))
+    
+    def test_successul_login_with_redirect(self):
+        redirect_url = reverse('feed')
+        form_input = {'username': '@janedoe', 'password': 'Password123', 'next': redirect_url}
+        response = self.client.post(self.url, form_input, follow=True)
+        self.assertTrue(self._is_logged_in())
+        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
         self.assertTemplateUsed(response, 'feed.html')
         message = list(response.context['messages'])
         self.assertEqual(0, len(message))

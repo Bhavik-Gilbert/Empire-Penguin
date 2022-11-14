@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -33,17 +34,23 @@ def log_in(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('feed')
+                redirect_url = request.POST.get('next') or 'feed'
+                return redirect(redirect_url)
 
         # Add error messages
         messages.add_message(request, messages.ERROR, "The username or password is incorrect") 
 
     form = LogInForm()
-    return render(request, 'login.html', {'form': form})
+
+    # dealing with getting next redirect for required login page
+    next = request.GET.get('next') or ''
+
+    return render(request, 'login.html', {'form': form, 'next':next})
 
 def log_out(request):
     logout(request)
     return redirect('home')
 
+@login_required
 def feed(request):
     return render(request, 'feed.html')

@@ -131,6 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User model for autherntication purposes
 AUTH_USER_MODEL = 'microblogs.User'
 
+# Login Url for redirecting users from login protected views
+LOGIN_URL = 'login'
+
 # Message level tags should use bootstrap terms
 MESSAGE_TAGS = {
 	message_constants.DEBUG: 'dark',
