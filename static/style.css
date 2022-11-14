@@ -70,8 +70,3 @@ h1, p {color: var(--white)}
     border-radius: 1em;
     color: var(--white);
 }
-
-.error_message {
-    color: red;
-    padding: 2vh 0 2vh 0;
-}

@@ -3,11 +3,7 @@
 {% block body %}
     <form action="{% url 'login' %}" method="post" class="clucker-box">
         <h1>Login</h1>
-
-        {% for message in messages %}
-            <div class="error_message"> {{ message }} </div>
-        {% endfor %}
-
+        
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
         <input type="submit" value="Login" class="btn btn-sm btn-light btn-outline-dark">
