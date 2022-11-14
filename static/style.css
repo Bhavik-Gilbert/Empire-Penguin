@@ -1,28 +1,31 @@
 html {
     --primary:#D4EAA7;
-    --secondary: #008080;
+    --secondary: #333333 ;
 
     --white: #fff;
     --black: #000;
 }
 
-.page {
+body {
     background-color : var(--secondary);
-    background-image: url("images/chicken_background.png");
+    background-image: url("images/penguin_background.png");
     background-repeat: repeat;
     padding: 4vh 4vw;
+    display: block;
 }
 
 h1, p {color: var(--white)}
 
 .clucker-box {
-    align-items: center;
+    /* align-items: left;
     width: fit-content;
-    height: fit-content;
-    padding: 1em;
+    height: fit-content; */
+    padding: 2em 5em;
+    opacity: 0.9;
     background-color: var(--secondary);
     box-shadow: var(--secondary) 0px 20px 30px -10px;
     border-radius: 1em;
+    color: var(--white);
 }
 
 .error_message {

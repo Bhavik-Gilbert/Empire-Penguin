@@ -36,7 +36,7 @@ def log_in(request):
                 return redirect('feed')
 
         # Add error messages
-        messages.add_message(request, messages.ERROR, "The username or passsword is incorrect") 
+        messages.add_message(request, messages.ERROR, "The username or password is incorrect") 
 
     form = LogInForm()
     return render(request, 'login.html', {'form': form})
