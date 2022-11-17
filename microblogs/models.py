@@ -37,3 +37,15 @@ class User(AbstractUser):
         blank=True,
         unique=False
     )
+
+class Post(models.Model):
+    """Posts by users in their microblogs."""
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.CharField(max_length=280)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        """Model options."""
+
+        ordering = ['-created_at']

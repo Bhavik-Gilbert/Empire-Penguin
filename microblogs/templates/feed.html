@@ -6,5 +6,16 @@
     <p>The place for free range coversation</p>
 
     <a href='{% url 'logout' %}' class="btn btn-sm btn-light btn-outline-primary">Logout</a>
+
+    <h3>New post</h3>
+    <form action="{% url 'new_post' %}" method="post">
+        {% csrf_token %}
+        {% include 'partials/bootstrap_form.html' with form=form %}
+        <input type="submit" value="Cluck" class="btn btn-sm btn-light btn-outline-dark">
+        {% comment %} <button type="submit" class="btn btn-primary">Cluck</button> {% endcomment %}
+    </form>
+
+    <h1>Feed</h1>
+
 </div>
 {% endblock %}
