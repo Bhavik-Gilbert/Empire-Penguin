@@ -5,11 +5,13 @@ from django.contrib import messages
 
 from .models import User
 from .forms import LogInForm, SignUpForm
+from .helpers import login_prohibited
 
-# Create your views here.
+@login_prohibited
 def home(request):
     return render(request, 'home.html')
 
+@login_prohibited
 def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -23,6 +25,7 @@ def sign_up(request):
        
     return render(request, 'signup.html', {'form': form})
 
+@login_prohibited
 def log_in(request):
     if request.method == 'POST':
         form = LogInForm(request.POST)
