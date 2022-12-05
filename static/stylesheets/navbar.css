@@ -1,8 +1,8 @@
 .navbar {
     width: 100vw;
     transform: translate3d(-4vw, -4vh, 0);
-    background-color: var(--secondary);
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    background-color: var(--primary-dark);
+    box-shadow: rgba(187, 241, 241, 0.4) 0px 2px 4px, rgba(187, 241, 241, 0.3) 0px 7px 13px -3px, rgba(187, 241, 241, 0.2) 0px -3px 0px inset;
     z-index: 100;
     padding: 1em 0;
 }
@@ -16,7 +16,7 @@
 .navbar .nav ul li {
     height: 100%;
     transition:var(--ease);
-    padding: 1.7em 1.5em;
+    padding: 1.5em 1.5em;
     border-radius: 0.5em;
     display: inline;
 }

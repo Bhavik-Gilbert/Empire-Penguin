@@ -9,7 +9,7 @@
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Login" class="button">
-        <a href="{% url 'signup' %}" class="button-alt">Sign up</a>
+        <input type="submit" value="Login" class="button-alt">
+        <a href="{% url 'signup' %}" class="button">Sign up</a>
     </form>
 {% endblock %}

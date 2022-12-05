@@ -1,26 +1,43 @@
 html {
-    --primary:#9D92FF;
-    --primary-dark: #7d74cf;
-    --secondary: #333333 ;
+    --primary:#BBF1F1;
+    --primary-dark: #008080;
 
     --white: #fff;
+    --black-light: #333333 ;
     --black: #000;
     
-    --shade1: rgba(117, 32, 186, 0.4);
-    --shade2: rgba(117, 32, 186, 0.3);
-    --shade3: rgba(117, 32, 186, 0.2);
-    --shade4: rgba(117, 32, 186, 0.1);
-    --shade5: rgba(117, 32, 186, 0.05);
+    --shade1: rgba(187, 241, 241, 0.4);
+    --shade2: rgba(187, 241, 241, 0.3);
+    --shade3: rgba(187, 241, 241, 0.2);
+    --shade4: rgba(187, 241, 241, 0.1);
+    --shade5: rgba(187, 241, 241, 0.05);
 
     --ease: all ease 0.5s;
+    --animation-gradient: gradient 15s ease infinite;
+    --animation-gradient-slow: gradient 30s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 /* Page */
 
 body {
     background-color : var(--primary-dark);
-    background-image: url("../images/penguin_background.png");
-    background-repeat: repeat;
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+    overflow-x: hidden;
     padding: 4vh 4vw;
     display: block;
 }
@@ -29,11 +46,18 @@ h1, p {color: var(--white)}
 
 .clucker-box {
     padding: 2em 5em;
-    opacity: 0.9;
-    background-color: var(--primary);
-    box-shadow: var(--secondary) 0px 20px 30px -10px;
+    opacity: 0.8;
+    background: linear-gradient(-45deg, var(--primary), var(--primary-dark), var(--primary));
+	background-size: 400% 400%;
+	animation: var(--animation-gradient-slow);
+    box-shadow: var(--black-light) 0px 20px 30px -10px;
     border-radius: 1em;
     color: var(--white);
+    backdrop-filter: blur(10px);
+    transition: var(--ease);
+}
+.clucker-box:hover {
+    opacity: 0.95;
 }
 
 .button, .button-alt {
@@ -49,15 +73,16 @@ h1, p {color: var(--white)}
 }
 .button-alt {
     background-color: var(--white);
-    color: var(--primary);
+    color: var(--primary-dark);
+}
+.button:hover, .button-alt:hover {
+    box-shadow: var(--shade1) 0px 5px, var(--shade2) 0px 10px, var(--shade3) 0px 15px, var(--shade4) 0px 20px, var(--shade5) 0px 25px;
 }
 .button:hover {
     background-color: var(--white);
     color: var(--primary-dark);
-    box-shadow: var(--shade1) 0px 5px, var(--shade2) 0px 10px, var(--shade3) 0px 15px, var(--shade4) 0px 20px, var(--shade5) 0px 25px;
 }
 .button-alt:hover {
     background-color: var(--black);
     color: var(--primary);
-    box-shadow: var(--shade1) 0px 5px, var(--shade2) 0px 10px, var(--shade3) 0px 15px, var(--shade4) 0px 20px, var(--shade5) 0px 25px;
 }

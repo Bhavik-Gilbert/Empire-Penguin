@@ -15,7 +15,7 @@
     <form action="{% url 'new_post' %}" method="post">
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Vocalization" class="btn btn-sm btn-light btn-outline-dark">
+        <input type="submit" value="Vocalization" class="button">
         {% comment %} <button type="submit" class="btn btn-primary">Cluck</button> {% endcomment %}
     </form>
 
