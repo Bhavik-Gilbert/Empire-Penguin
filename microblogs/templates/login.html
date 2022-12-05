@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}Login{% endblock %}
+
 {% block body %}
     <form action="{% url 'login' %}" method="post" class="clucker-box">
         <h1>Login</h1>
@@ -7,7 +9,7 @@
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Login" class="btn btn-sm btn-light btn-outline-dark">
-        <a href="{% url 'signup' %}" class="btn btn-sm btn-light btn-outline-primary">Sign up</a>
+        <input type="submit" value="Login" class="button">
+        <a href="{% url 'signup' %}" class="button-alt">Sign up</a>
     </form>
 {% endblock %}

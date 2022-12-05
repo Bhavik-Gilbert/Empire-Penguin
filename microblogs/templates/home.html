@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
+{% block title %}Home{% endblock %}
+
 {% block body %}
 <div class="clucker-box">
-  <h1>Welcome to Clucker</h1>
-  <p>The place for free range coversation</p>
+  <h1>Welcome to the <strong>Penguin Empire</strong></h1>
+  <p>The place for raising flippers and sharing your unique calls</p>
 
-  <a href='{% url 'signup' %}' class="btn btn-sm btn-light btn-outline-primary">Sign up</a>
-  <a href='{% url 'login' %}' class="btn btn-sm btn-light btn-outline-primary">Login</a>
+  <a href='{% url 'signup' %}' class="button-alt">Sign up</a>
+  <a href='{% url 'login' %}' class="button-alt">Login</a>
 </div>
 {% endblock %}
