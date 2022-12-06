@@ -38,11 +38,15 @@ class User(AbstractUser):
         unique=False
     )
 
+    def __str__(self):
+        return str(self.username)
+
 class Post(models.Model):
     """Posts by users in their microblogs."""
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(max_length=280)
+    # image = models.ImageField(upload_to = f"{author}/posts/")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

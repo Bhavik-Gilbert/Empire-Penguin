@@ -59,5 +59,15 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['text']
         widgets = {
-            'text': forms.Textarea()
+            'text': forms.Textarea(),
+            'image': forms.ImageField()
         }
+    
+    def save(self, user):
+        super().save(commit=False)
+
+        post = Post.objects.create(
+            author=user, 
+            text=self.cleaned_data.get('text'))
+
+        return post
