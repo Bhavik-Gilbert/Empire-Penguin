@@ -1,19 +1,21 @@
-from enum import unique
 from django.db import models
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinLengthValidator
 from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
 class User(AbstractUser):
+    """Users in microblogs"""
+
     username = models.CharField(
         max_length=30, 
         unique=True,
         # Custom validator object
         validators=[RegexValidator(
-            regex=r'^@\w{3,}$',
-            message='Username must consist of @ followed by at least three alphanumericals'
+            regex=r'^\w{3,}$',
+            message='Username must consist of at least three alphanumericals'
         )]
     )
+
+    profile_pic = models.ImageField(upload_to = f"avatar/{username}/", blank=True, null=True)
 
     first_name = models.CharField(
         max_length=50,
@@ -40,13 +42,22 @@ class User(AbstractUser):
 
     def __str__(self):
         return str(self.username)
+     
+    def get_posts(self):
+        return Post.objects.filter(author=self)
 
 class Post(models.Model):
     """Posts by users in their microblogs."""
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.CharField(max_length=280)
-    # image = models.ImageField(upload_to = f"{author}/posts/")
+    text = models.CharField(
+        max_length=280,
+        validators=[MinLengthValidator(
+            limit_value=1,
+            message="Why would you want to post an empty message"
+        )]
+        )
+    image = models.ImageField(upload_to = f"{author}/posts/", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

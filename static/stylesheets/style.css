@@ -31,6 +31,13 @@ html {
 
 /* Page */
 
+.box_down, .box {
+    padding-bottom: 1em;
+}
+.box_up, .box {
+    padding-top: 1em;
+}
+
 body {
     background-color : var(--primary-dark);
     background-image: url("../images/background.jpg");
@@ -42,7 +49,12 @@ body {
     display: block;
 }
 
-h1, p {color: var(--white)}
+h1, p, .title {color: var(--white)}
+.title {
+    font-size: 50px;
+    font-family: "Verdana", Sans-serif;
+    font-weight: oblique;
+}
 
 .clucker-box {
     padding: 2em 5em;

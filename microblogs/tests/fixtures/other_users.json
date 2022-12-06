@@ -5,7 +5,7 @@
         "fields": {
             "first_name":"John",
             "last_name":"Doe",
-            "username":"@johndoe",
+            "username":"johndoe",
             "email":"johndoe@example.org",
             "bio":"hi",
             "password":"pbkdf2_sha256$320000$lj0T8KZyTCYcO20r1kc9i0$93mV7o8ImxpcxkFgUntn2B8+iZF9posVsdQaO8IOMV4=",

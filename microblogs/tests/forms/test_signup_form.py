@@ -12,7 +12,7 @@ class SignUpFormTesCase(TestCase):
         self.form_input = {
             'first_name':'Jane',
             'last_name':'Doe',
-            'username':'@janedoe',
+            'username':'janedoe',
             'email':'janedoe@example.org',
             'bio':'hi',
             'new_password':'Password123',
@@ -40,7 +40,7 @@ class SignUpFormTesCase(TestCase):
         self.assertTrue(isinstance(password_confirmation_widget, forms.PasswordInput))
 
     def test_form_uses_valid_model(self):
-        self.form_input['username'] = 'badusername'
+        self.form_input['username'] = 'b'
         form = SignUpForm(data=self.form_input)
         self.assertFalse(form.is_valid())
     
@@ -74,7 +74,7 @@ class SignUpFormTesCase(TestCase):
         form.save()
         after_count = User.objects.count()
         self.assertEqual(before_count + 1, after_count)
-        user = User.objects.get(username='@janedoe')
+        user = User.objects.get(username='janedoe')
         self.assertEqual(user.first_name, 'Jane')
         self.assertEqual(user.last_name, 'Doe')
         self.assertEqual(user.email, 'janedoe@example.org')

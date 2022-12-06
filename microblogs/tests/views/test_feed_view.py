@@ -14,7 +14,7 @@ class FeedViewTestCase(TestCase):
 
     def setUp(self):
         self.url = reverse('feed')
-        self.user = User.objects.get(username="@janedoe")
+        self.user = User.objects.get(username="janedoe")
 
     def test_feed_url(self):
         self.assertEqual(self.url,'/feed/')

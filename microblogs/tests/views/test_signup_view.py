@@ -17,13 +17,13 @@ class SignupViewTestCase(TestCase, LogInTester):
         self.form_input = {
             'first_name':'John',
             'last_name':'Doe',
-            'username':'@johndoe',
+            'username':'johndoe',
             'email':'johndoe@example.org',
             'bio':'hi',
             'new_password':'Password123',
             'password_confirmation':'Password123'
         }
-        self.user = User.objects.get(username="@janedoe")
+        self.user = User.objects.get(username="janedoe")
 
     def test_signup_url(self):
         self.assertEqual(self.url, '/signup/')
@@ -44,7 +44,7 @@ class SignupViewTestCase(TestCase, LogInTester):
         self.assertTemplateUsed(response, 'feed.html')
 
     def test_unsuccessful_signup(self):
-        self.form_input['username'] = 'BAD_USERNAME'
+        self.form_input['username'] = 'B'
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input)
         after_count = User.objects.count()
@@ -64,7 +64,7 @@ class SignupViewTestCase(TestCase, LogInTester):
         response_url = reverse('feed')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
         self.assertTemplateUsed(response, 'feed.html')
-        user = User.objects.get(username='@janedoe')
+        user = User.objects.get(username='janedoe')
         self.assertEqual(user.first_name, 'Jane')
         self.assertEqual(user.last_name, 'Doe')
         self.assertEqual(user.email, 'janedoe@example.org')

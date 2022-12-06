@@ -14,7 +14,7 @@ class UserModelTestCase(TestCase):
 
     # Setup code run before every test
     def setUp(self):
-        self.user = User.objects.get(username="@janedoe")
+        self.user = User.objects.get(username="janedoe")
 
 
     def test_valid_user(self):
@@ -25,44 +25,36 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
     
     def test_username_can_be_30_characters_long(self):
-        self.user.username = '@' + 'x' * 29
+        self.user.username = 'a' + 'x' * 29
         self._assert_user_is_valid()
 
     def test_username_cannot_be_over_30_characters_long(self):
-        self.user.username = '@' + 'x' * 30
+        self.user.username = 'a' + 'x' * 30
         self._assert_user_is_invalid()
 
     def test_username_must_be_unqiue(self):
-        user = User.objects.get(username="@johndoe")
-        self.user.username = '@johndoe'
-        self._assert_user_is_invalid()
-    
-    def test_username_must_start_with_at_symbol(self):
+        user = User.objects.get(username="johndoe")
         self.user.username = 'johndoe'
         self._assert_user_is_invalid()
 
-    def test_username_must_conatin_only_alphanumericals_after_at(self):
-        self.user.username = '@john!doe'
+    def test_username_must_conatin_only_alphanumericals(self):
+        self.user.username = 'john@doe'
         self._assert_user_is_invalid()
     
-    def test_username_must_conatin_atleast_3_alphanumericals_after_at(self):
-        self.user.username = '@jo'
+    def test_username_must_conatin_atleast_3_alphanumericals(self):
+        self.user.username = 'jo'
         self._assert_user_is_invalid()
     
     def test_username_may_contain_numbers(self):
-        self.user.username = '@j0hndoe2'
+        self.user.username = 'j0hndoe2'
         self._assert_user_is_valid()
-    
-    def test_username_must_contain_only_one_at(self):
-        self.user.username = '@johndoe@'
-        self._assert_user_is_invalid()
 
     def test_firstname_must_not_be_blank(self):
         self.user.first_name = ''
         self._assert_user_is_invalid()
 
     def test_firstname_may_aleady_exist(self):
-        user = User.objects.get(username="@johndoe")
+        user = User.objects.get(username="johndoe")
         self.user.first_name = 'Jane'
         self._assert_user_is_valid()
     
@@ -79,7 +71,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_lastname_may_aleady_exist(self):
-        user = User.objects.get(username="@johndoe")
+        user = User.objects.get(username="johndoe")
         self.user.last_name = 'Doe'
         self._assert_user_is_valid()
     
@@ -92,7 +84,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
     
     def test_email_must_be_unique(self):
-        user = User.objects.get(username="@johndoe")
+        user = User.objects.get(username="johndoe")
         self.user.email ='johndoe@example.org'
         self._assert_user_is_invalid()
 
@@ -113,7 +105,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_valid()
 
     def test_bio_may_already_exist(self):
-        user = User.objects.get(username="@johndoe")
+        user = User.objects.get(username="johndoe")
         self.user.bio='hi'
         self._assert_user_is_valid()
     

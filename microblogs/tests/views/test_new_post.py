@@ -10,7 +10,7 @@ class NewPostTest(TestCase):
     def setUp(self):
         super(TestCase, self).setUp()
         self.user = User.objects.create_user(
-            '@johndoe',
+            'johndoe',
             first_name='John',
             last_name='Doe',
             email='johndoe@example.org',
@@ -23,13 +23,13 @@ class NewPostTest(TestCase):
     def test_new_post_url(self):
         self.assertEqual(self.url,'/new_post/')
 
-    def test_get_new_post_is_forbidden(self):
+    def test_get_new_post(self):
         self.client.login(username=self.user.username, password="Password123")
         user_count_before = Post.objects.count()
         response = self.client.get(self.url, follow=True)
         user_count_after = Post.objects.count()
         self.assertEqual(user_count_after, user_count_before)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 200)
 
     def test_post_new_post_redirects_when_not_logged_in(self):
         user_count_before = Post.objects.count()
@@ -56,18 +56,18 @@ class NewPostTest(TestCase):
         self.assertTemplateUsed(response, 'feed.html')
 
     def test_unsuccessful_new_post(self):
-        self.client.login(username='@johndoe', password='Password123')
+        self.client.login(username='johndoe', password='Password123')
         user_count_before = Post.objects.count()
         self.data['text'] = ""
         response = self.client.post(self.url, self.data, follow=True)
         user_count_after = Post.objects.count()
         self.assertEqual(user_count_after, user_count_before)
-        self.assertTemplateUsed(response, 'feed.html')
+        self.assertTemplateUsed(response, 'new_post.html')
 
     def test_cannot_create_post_for_other_user(self):
-        self.client.login(username='@johndoe', password='Password123')
+        self.client.login(username='johndoe', password='Password123')
         other_user = User.objects.create_user(
-            '@janedoe',
+            'janedoe',
             first_name='Jane',
             last_name='Doe',
             email='janedoe@example.org',

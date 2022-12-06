@@ -15,7 +15,7 @@ class LogInViewTestCase(TestCase, LogInTester):
 
     def setUp(self):
         self.url = reverse('login')
-        self.user = User.objects.get(username="@janedoe")
+        self.user = User.objects.get(username="janedoe")
 
     def test_login_url(self):
         self.assertEqual(self.url, '/login/')
@@ -61,7 +61,7 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertTemplateUsed(response, 'feed.html')
 
     def test_unsuccessful_login(self):
-        form_input = {'username': '@johndoe', 'password': 'WRONGPASSWORD'}
+        form_input = {'username': 'johndoe', 'password': 'WRONGPASSWORD'}
         response = self.client.post(self.url, form_input)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
@@ -87,7 +87,7 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(message[0].level, messages.ERROR)
     
     def test_login_with_blank_password(self):
-        form_input = {'username': '@johndoe', 'password': ''}
+        form_input = {'username': 'johndoe', 'password': ''}
         response = self.client.post(self.url, form_input)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
@@ -100,7 +100,7 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(message[0].level, messages.ERROR)
 
     def test_successul_login(self):
-        form_input = {'username': '@janedoe', 'password': 'Password123'}
+        form_input = {'username': 'janedoe', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow=True)
         self.assertTrue(self._is_logged_in())
         response_url = reverse('feed')
@@ -111,7 +111,7 @@ class LogInViewTestCase(TestCase, LogInTester):
     
     def test_successul_login_with_redirect(self):
         redirect_url = reverse('feed')
-        form_input = {'username': '@janedoe', 'password': 'Password123', 'next': redirect_url}
+        form_input = {'username': 'janedoe', 'password': 'Password123', 'next': redirect_url}
         response = self.client.post(self.url, form_input, follow=True)
         self.assertTrue(self._is_logged_in())
         self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
@@ -130,7 +130,7 @@ class LogInViewTestCase(TestCase, LogInTester):
     def test_valid_login_by_inactive_user(self):
         self.user.is_active = False
         self.user.save()
-        form_input = {'username': '@janedoe', 'password': 'Password123'}
+        form_input = {'username': 'janedoe', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')

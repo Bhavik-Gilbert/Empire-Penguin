@@ -3,9 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
+    <div class="title box_down">Login</div>
+
     <form action="{% url 'login' %}" method="post" class="clucker-box">
-        <h1>Login</h1>
-        
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         {% include 'partials/bootstrap_form.html' with form=form %}

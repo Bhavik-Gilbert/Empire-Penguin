@@ -4,23 +4,13 @@
 
 {% block body %}
 <div class="clucker-box">
-    <h1>Welcome to Vocalization</h1>
-    <p>The place for free range coversation</p>
-
-    <a href='{% url 'logout' %}' class="btn btn-sm btn-light btn-outline-primary">Logout</a>
-
-    <br><br><br><br><br>
-
-    <h3>New post</h3>
-    <form action="{% url 'new_post' %}" method="post">
-        {% csrf_token %}
-        {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Vocalization" class="button">
-        {% comment %} <button type="submit" class="btn btn-primary">Cluck</button> {% endcomment %}
-    </form>
-
-    <br><br><br><br><br>
-
-    <h1>Feed</h1>
+    <h1>Welcome to the <strong>Penguin Empire</strong></h1>
+    <p>The place for raising flippers and sharing your unique calls</p>
+    
+    <a href='{% url 'new_post' %}' class="button-alt">Post</a>
+    <a href='{% url 'logout' %}' class="button-alt">Logout</a>
 </div>
+
+<div class="title box">Feed</div>
+
 {% endblock %}

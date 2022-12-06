@@ -57,10 +57,10 @@ class PostForm(forms.ModelForm):
         """Form options."""
 
         model = Post
-        fields = ['text']
+        fields = ['text', 'image']
         widgets = {
             'text': forms.Textarea(),
-            'image': forms.ImageField()
+            'image': forms.ClearableFileInput()
         }
     
     def save(self, user):

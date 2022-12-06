@@ -7,7 +7,7 @@ from microblogs.forms import LogInForm
 class LogInFormTestCase(TestCase):
 
     def setUp(self):
-       self.form_input = {'username': '@janedoe', 'password': 'Password123'}
+       self.form_input = {'username': 'janedoe', 'password': 'Password123'}
      
     def test_form_contains_required_fields(self):
         form = LogInForm()

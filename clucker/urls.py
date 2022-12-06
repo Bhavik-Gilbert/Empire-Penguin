@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from microblogs import views
 
@@ -26,4 +26,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_redirect, name='logout'),
     path('new_post/', views.new_post_view, name='new_post'),
+    re_path(r'profile/(?P<username>\w+)/$',
+            views.profile_view, name='profile'),
 ]
