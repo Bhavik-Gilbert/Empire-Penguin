@@ -16,7 +16,8 @@ class PostTest(TestCase):
         )
         self.post = Post(
             author=self.user,
-            text="The quick brown fox jumps over the lazy dog."
+            text="The quick brown fox jumps over the lazy dog.",
+            image=None
         )
 
     def test_valid_message(self):
