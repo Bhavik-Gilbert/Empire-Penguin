@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6, p, .title {color: var(--white)}
     margin-bottom: 1em;
 }
 .post_image {
-    width: inherit;
+    width:100%;
     transition: var(--ease);
     display: block;
     border-radius: inherit;
@@ -107,12 +107,12 @@ h1, h2, h3, h4, h5, h6, p, .title {color: var(--white)}
 }
 .post .button {
     display: block;
-    width:inherit;
+    width:100%;
     border-radius:inherit;
 }
 .post:hover {
+    width: 24vw;
     font-size: 1.4em;
-    width: 22vw;
     opacity: 1;
     box-shadow: var(--shade1) 0px 5px, var(--shade2) 0px 10px, var(--shade3) 0px 15px, var(--shade4) 0px 20px, var(--shade5) 0px 25px;
 }
