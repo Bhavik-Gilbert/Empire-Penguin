@@ -12,7 +12,7 @@ def new_post_view(request: HttpRequest) -> HttpResponse:
 
     if request.method == 'POST':
         current_user: User = request.user
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(current_user)
             return redirect('feed')

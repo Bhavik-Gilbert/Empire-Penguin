@@ -1,6 +1,9 @@
 from django.core.validators import RegexValidator
 from django import forms
 from .models import User, Post
+import base64
+from PIL import Image
+import io
 
 class LogInForm(forms.Form):
     username = forms.CharField(label='Username')
@@ -57,17 +60,27 @@ class PostForm(forms.ModelForm):
         """Form options."""
 
         model = Post
-        fields = ['text', 'image']
+        fields = ['text']
         widgets = {
             'text': forms.Textarea(),
-            'image': forms.ClearableFileInput()
         }
+    
+    image = forms.ImageField(required=False)
     
     def save(self, user):
         super().save(commit=False)
 
+        check_image = self.cleaned_data.get('image')
+        if check_image is not None:
+            image = Image.open(io.BytesIO(check_image.file.read()))
+            buffered = io.BytesIO()
+            image.save(buffered, format="PNG")
+            check_image = base64.b64encode(buffered.getvalue()).decode('ascii')
+
         post = Post.objects.create(
             author=user, 
-            text=self.cleaned_data.get('text'))
+            text=self.cleaned_data.get('text'),
+            image=check_image
+            )
 
-        return post
+        return None

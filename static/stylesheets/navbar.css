@@ -7,6 +7,18 @@
     padding: 1em 0;
 }
 
+.profile_pic_small {
+    transition: var(--ease);
+    margin: 0.5em;
+    height: 2em;
+    width: 2em;
+}
+.profile_pic_small:hover {
+    margin: 0;
+    height: 3em;
+    width: 3em;
+}
+
 .navbar .nav ul {
     list-style-type: none;
     margin: 0 0 0.4em 0;

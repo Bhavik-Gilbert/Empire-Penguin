@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 
-from ..models import User
+from ..models import User, Post
 
 
 @login_required
@@ -13,7 +13,7 @@ def profile_view(request: HttpRequest, username: str) -> HttpResponse:
 
     account_user = User.objects.get(username=username)
     
-    return render(request, "profile.html", {'posts': account_user.get_posts()})
+    return render(request, "profile.html", {'account_user': account_user})
 
 
     

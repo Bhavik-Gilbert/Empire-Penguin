@@ -13,7 +13,7 @@ class UserAdmin(admin.ModelAdmin):
 
 # Superuser
 """ 
-@Admin 
+Admin 
 admin@example.com 
 Password
 """

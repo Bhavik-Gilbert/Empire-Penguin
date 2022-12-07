@@ -14,8 +14,8 @@ class User(AbstractUser):
             message='Username must consist of at least three alphanumericals'
         )]
     )
-
-    profile_pic = models.ImageField(upload_to = f"avatar/{username}/", blank=True, null=True)
+    
+    profile_pic = models.TextField(blank=True, null=True)
 
     first_name = models.CharField(
         max_length=50,
@@ -57,7 +57,8 @@ class Post(models.Model):
             message="Why would you want to post an empty message"
         )]
         )
-    image = models.ImageField(upload_to = f"{author}/posts/", blank=True, null=True)
+
+    image = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

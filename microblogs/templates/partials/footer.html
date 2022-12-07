@@ -1,0 +1,24 @@
+{% load static %}
+{% load day_night_tags %}
+
+<head>
+    <link href="{% static 'stylesheets/footer.css' %}" rel="stylesheet">
+</head>
+
+<div class="footer">
+    {% if now|is_day %}
+        <a href="{% url 'login' %}">
+            <div class="bottom_right clucker-box_footer">
+                <p class="inline">Work Hard Play Harder</p>
+                <img class="profile_pic_footer inline" src="{% static 'images/penguin_day.jpg' %}"/>
+            </div>
+        </a>
+    {% else %}
+        <a href="{% url 'logout' %}">
+            <div class="bottom_right clucker-box_footer">
+                <h5 class="inline">Rest Up Sleep Tight</h5>
+                <img class="profile_pic_footer inline" src="{% static 'images/penguin_night.jpg' %}"/>
+            </div>
+        </a>
+    {% endif %}
+</div>

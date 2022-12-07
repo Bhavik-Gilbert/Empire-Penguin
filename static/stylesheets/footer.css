@@ -1,0 +1,33 @@
+.footer {
+    width: 100vw;
+    transform: translate3d(-4vw, 0, 0);
+    z-index: 100;
+    padding: 1em 1em;
+}
+
+.bottom_right {
+    display: block;
+    float: right;
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+.clucker-box_footer {
+    padding: 1em 1em 1em 1em;
+    opacity: 0.8;
+    box-shadow: var(--black-light) 0px 20px 30px -10px;
+    border-radius: 1em;
+    color: var(--white);
+    backdrop-filter: blur(100px);
+    transition: var(--ease);
+}
+.clucker-box_footer:hover {
+    opacity: 0.95;
+}
+
+
+.profile_pic_footer {
+    height: 6em;
+    width: 6em;
+    border-radius: 50%;
+}

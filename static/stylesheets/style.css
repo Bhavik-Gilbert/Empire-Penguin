@@ -30,12 +30,24 @@ html {
 }
 
 /* Page */
+.page {
+    min-height: 82vh;
+}
 
 .box_down, .box {
-    padding-bottom: 1em;
+    margin-bottom: 1em;
 }
 .box_up, .box {
-    padding-top: 1em;
+    margin-top: 1em;
+}
+.box_right, .box {
+    margin-right: 1em;
+}
+.box_left, .box {
+    margin-left: 1em;
+}
+.inline {
+    display: inline-block;
 }
 
 body {
@@ -44,12 +56,11 @@ body {
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     background-attachment: fixed;
-    overflow-x: hidden;
     padding: 4vh 4vw;
     display: block;
 }
 
-h1, p, .title {color: var(--white)}
+h1, h2, h3, h4, h5, h6, p, .title {color: var(--white)}
 .title {
     font-size: 50px;
     font-family: "Verdana", Sans-serif;
@@ -57,19 +68,62 @@ h1, p, .title {color: var(--white)}
 }
 
 .clucker-box {
+    background-color : var(--shade2);
     padding: 2em 5em;
     opacity: 0.8;
-    background: linear-gradient(-45deg, var(--primary), var(--primary-dark), var(--primary));
-	background-size: 400% 400%;
-	animation: var(--animation-gradient-slow);
     box-shadow: var(--black-light) 0px 20px 30px -10px;
     border-radius: 1em;
     color: var(--white);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(100px);
     transition: var(--ease);
 }
 .clucker-box:hover {
     opacity: 0.95;
+    background-color : var(--shade1);
+}
+
+.post {
+    position: relative;
+    display: inline-block;
+    background-color: var(--black-light);
+    width: 20vw;
+    color: var(--primary);
+    border-radius: 0.5em;
+    transition: var(--ease);
+    opacity: 0.9;
+    font-family: "Copperplate";
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+.post_image {
+    width: inherit;
+    transition: var(--ease);
+    display: block;
+    border-radius: inherit;
+    min-height: fit-content;
+}
+.post p {
+    font-size: 0.8em;
+}
+.post .button {
+    display: block;
+    width:inherit;
+    border-radius:inherit;
+}
+.post:hover {
+    font-size: 1.4em;
+    width: 22vw;
+    opacity: 1;
+    box-shadow: var(--shade1) 0px 5px, var(--shade2) 0px 10px, var(--shade3) 0px 15px, var(--shade4) 0px 20px, var(--shade5) 0px 25px;
+}
+.post:hover .post_image {
+    border-radius: 0.2em;
+}
+
+.profile_pic {
+    height: 9em;
+    width: 9em;
+    border-radius: 50%;
 }
 
 .button, .button-alt {
