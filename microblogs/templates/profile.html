@@ -8,13 +8,29 @@
 <div class="title box_down">Profile</div>
 
 <div class="clucker-box box_down" align="left">
+    <div class="profile inline box_right">
     {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
-        <img src="{% static 'favicon.ico' %}" class="profile_pic inline box_right">
+        <img src="{% static 'favicon.ico' %}" class="profile_pic">
     {% else %}
-        <img src="data:image/png;base64,{{account_user.profile_pic}}" class="profile_pic inline box_right">
+        <img src="data:image/png;base64,{{account_user.profile_pic}}" class="profile_pic">
     {% endif %}
+    </div>
 
-    <div class="title inline">@{{account_user.username}}</div>
+
+    <div class="inline box_left">
+        <div align="center" class="title row">@{{account_user.username}}</div>
+        <div class="row">
+            {% if user == account_user %}
+            {% elif user.id in account_user.get_followers %}
+            <a align="center" class="button" href="{% url 'unfollow' page='profile' username=account_user.username %}">Unfollow</a>
+            {% else %}
+            <a align="center" class="button-alt" href="{% url 'follow' page='profile' username=account_user.username %}">Follow</a>
+            {% endif %}
+        </div>
+        <div class="row" align="center">
+            <h4><strong>Followers: {{account_user.get_followers.count}}</strong></h4>
+        </div>
+    </div>
 
     <div class="box">
     <h5>{{account_user.first_name}} {{account_user.last_name}}</h5>
@@ -28,26 +44,28 @@
 
 <br>
 
-<div class="clucker-box box">
-    {% for post in account_user.get_posts %}
-        <div class="post box">
-        {% if not post.image is None and not post.image == "" %}
-            <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
-        {% endif %}
-        
-        <div class=box>
-            {{post.text}}  
-        </div>
-        <div class=box>
-            <p>{{post.created_at}}</p> 
-        </div>
-        
-        
-        {% if account_user == user %}
-            <a class="button" href="{% url 'delete_post' pk=post.id username=account_user.username %}">Delete</a>
-        {% endif %}
+{% if account_user.get_posts.count > 0 %}
+    <div class="clucker-box box">
+        {% for post in account_user.get_posts %}
+            <div class="post box">
+            {% if not post.image is None and not post.image == "" %}
+                <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
+            {% endif %}
+            
+            <div class=box>
+                {{post.text}}  
+            </div>
+            <div class=box>
+                <p>{{post.created_at}}</p> 
+            </div>
+            
+            
+            {% if account_user == user %}
+                <a class="button" href="{% url 'delete_post' pk=post.id username=account_user.username %}">Delete</a>
+            {% endif %}
 
-        </div>
-    {% endfor %}
-</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}

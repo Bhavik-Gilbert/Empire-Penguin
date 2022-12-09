@@ -28,4 +28,6 @@ urlpatterns = [
     path('new_post/', views.new_post_view, name='new_post'),
     re_path(r'profile/(?P<username>\w+)/$', views.profile_view, name='profile'),
     re_path(r'delete_post/(?P<pk>\d+)/(?P<username>\w+)/$', views.delete_post_redirect, name='delete_post'),
+    re_path(r'follow/(?P<page>\w+)/(?P<username>\w+)/$', views.follow_redirect, name='follow'),
+    re_path(r'unfollow/(?P<page>\w+)/(?P<username>\w+)/$', views.unfollow_redirect, name='unfollow'),
 ]

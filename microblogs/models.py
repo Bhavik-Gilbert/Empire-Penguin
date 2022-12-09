@@ -45,9 +45,16 @@ class User(AbstractUser):
      
     def get_posts(self):
         return Post.objects.filter(author=self)
+    
+    def get_followers(self):
+        return Following.objects.filter(following=self).values_list('follower', flat=True)
+
+    def get_following(self):
+        return Following.objects.filer(follower=self).values_list('following', flat=True)
+
 
 class Post(models.Model):
-    """Posts by users in their microblogs."""
+    """Posts by users in their microblogs"""
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(
@@ -65,3 +72,9 @@ class Post(models.Model):
         """Model options."""
 
         ordering = ['-created_at']
+
+
+class Following(models.Model):
+    """Holds data of who Users follow"""
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower') # User who is following other user
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') # User they are following

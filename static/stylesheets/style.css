@@ -125,6 +125,9 @@ h1, h2, h3, h4, h5, h6, p, .title {color: var(--white)}
     width: 9em;
     border-radius: 50%;
 }
+.profile .profile_pic {
+    margin-top: -5em;
+}
 
 .button, .button-alt {
     text-decoration: none;
