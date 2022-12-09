@@ -24,10 +24,7 @@ class FeedViewTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'feed.html')
-        form = response.context['form']
-        self.assertTrue(isinstance(form, PostForm))
-        self.assertFalse(form.is_bound)
-    
+        
     def test_get_feed_with_redirect_when_not_logged_in(self):
         redirect_url = reverse_with_next('login', self.url)
         response = self.client.get(self.url)

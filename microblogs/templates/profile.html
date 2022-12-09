@@ -48,22 +48,21 @@
     <div class="clucker-box box">
         {% for post in account_user.get_posts %}
             <div class="post box">
-            {% if not post.image is None and not post.image == "" %}
-                <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
-            {% endif %}
-            
-            <div class=box>
-                {{post.text}}  
-            </div>
-            <div class=box>
-                <p>{{post.created_at}}</p> 
-            </div>
-            
-            
-            {% if account_user == user %}
-                <a class="button" href="{% url 'delete_post' pk=post.id username=account_user.username %}">Delete</a>
-            {% endif %}
-
+                {% if not post.image is None and not post.image == "" %}
+                    <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
+                {% endif %}
+                
+                <div>
+                    {{post.text}}  
+                </div>
+                <div class=box>
+                    <p>{{post.created_at}}</p> 
+                </div>
+                
+                
+                {% if account_user == user %}
+                    <a class="button" href="{% url 'delete_post' pk=post.id username=account_user.username %}">Delete</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

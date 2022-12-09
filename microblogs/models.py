@@ -50,7 +50,7 @@ class User(AbstractUser):
         return Following.objects.filter(following=self).values_list('follower', flat=True)
 
     def get_following(self):
-        return Following.objects.filer(follower=self).values_list('following', flat=True)
+        return Following.objects.filter(follower=self).values_list('following', flat=True)
 
 
 class Post(models.Model):
