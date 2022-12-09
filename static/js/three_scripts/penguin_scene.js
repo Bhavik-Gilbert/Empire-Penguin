@@ -154,18 +154,19 @@ function penguin_scene(sizeX, sizeY, container_id, resize_window) {
     renderer.setSize(sizeX, sizeY);
     container.appendChild(renderer.domElement);
 
-    document.addEventListener('mousedown', onDocumentMouseDown, false);
-    document.addEventListener('touchstart', onDocumentTouchStart, false);
-    document.addEventListener('touchmove', onDocumentTouchMove, false);
+    // TODO: Fix touch events to only react when over item
+    document.querySelector('#'+container_id).addEventListener('mousedown', onDocumentMouseDown, false);
+    document.querySelector('#'+container_id).addEventListener('touchstart', onDocumentTouchStart, false);
+    document.querySelector('#'+container_id).addEventListener('touchmove', onDocumentTouchMove, false);
 
     window.addEventListener('resize', onWindowResize, false);
   }
 
   function onDocumentMouseDown(event) {
     event.preventDefault();
-    document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.addEventListener('mouseup', onDocumentMouseUp, false);
-    document.addEventListener('mouseout', onDocumentMouseOut, false);
+    document.querySelector('#'+container_id).addEventListener('mousemove', onDocumentMouseMove, false);
+    document.querySelector('#'+container_id).addEventListener('mouseup', onDocumentMouseUp, false);
+    document.querySelector('#'+container_id).addEventListener('mouseout', onDocumentMouseOut, false);
     mouseXOnMouseDown = event.clientX - windowHalfX;
     mouseYOnMouseDown = event.clientY - windowHalfY;
     targetRotationYOnMouseDown = targetRotationY;
@@ -178,15 +179,15 @@ function penguin_scene(sizeX, sizeY, container_id, resize_window) {
   }
 
   function onDocumentMouseUp(event) {
-    document.removeEventListener('mousemove', onDocumentMouseMove, false);
-    document.removeEventListener('mouseup', onDocumentMouseUp, false);
-    document.removeEventListener('mouseout', onDocumentMouseOut, false);
+    document.querySelector('#'+container_id).removeEventListener('mousemove', onDocumentMouseMove, false);
+    document.querySelector('#'+container_id).removeEventListener('mouseup', onDocumentMouseUp, false);
+    document.querySelector('#'+container_id).removeEventListener('mouseout', onDocumentMouseOut, false);
   }
 
   function onDocumentMouseOut(event) {
-    document.removeEventListener('mousemove', onDocumentMouseMove, false);
-    document.removeEventListener('mouseup', onDocumentMouseUp, false);
-    document.removeEventListener('mouseout', onDocumentMouseOut, false);
+    document.querySelector('#'+container_id).removeEventListener('mousemove', onDocumentMouseMove, false);
+    document.querySelector('#'+container_id).removeEventListener('mouseup', onDocumentMouseUp, false);
+    document.querySelector('#'+container_id).removeEventListener('mouseout', onDocumentMouseOut, false);
   }
 
   function onDocumentTouchStart(event) {
