@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="post box" align="center">
+    <div class="row">
+        <a class="col-2 link" href="{% url 'profile' username=post.author %}">
+            {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
+                <img src="{% static 'favicon.ico' %}" class="profile_pic_small">
+            {% else %}
+                <img src="data:image/png;base64,{{post.author.profile_pic}}" class="profile_pic_small">
+            {% endif %}
+        </a>
+        <a class="col-md-auto d-flex align-items-center link" align="left" href="{% url 'profile' username=post.author %}">
+            <div class="title_small">@{{post.author}}</div>
+        </a>
+    </div>
+    
+    {% if not post.image is None and not post.image == "" %}
+        <div class="row box">
+            <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
+        </div>
+    {% endif %}
+    
+    <div class="row box">
+        <div class="col">
+            {{post.text}}  
+        </div>
+    </div>
+    <div class="row">
+        <p>{{post.created_at}}</p> 
+    </div>
+
+    {% if account_user == user %}
+        <div class="row">
+            <div class="col">
+                <a class="button-alt" href="{% url 'edit_post' pk=post.id username=account_user.username %}">Edit</a>
+            </div>
+            <div class="col">
+                <a class="button" href="{% url 'delete_post' pk=post.id username=account_user.username %}">Delete</a>
+            </div>
+        </div>
+    {% endif %}
+</div>

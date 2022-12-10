@@ -67,7 +67,7 @@ class PostForm(forms.ModelForm):
     
     image = forms.ImageField(required=False)
     
-    def save(self, user):
+    def save(self, user, instance=None):
         super().save(commit=False)
 
         check_image = self.cleaned_data.get('image')
@@ -77,10 +77,16 @@ class PostForm(forms.ModelForm):
             image.save(buffered, format="PNG")
             check_image = base64.b64encode(buffered.getvalue()).decode('ascii')
 
-        post = Post.objects.create(
-            author=user, 
-            text=self.cleaned_data.get('text'),
-            image=check_image
-            )
+        if instance is None:
+            post = Post.objects.create(
+                author = user, 
+                text = self.cleaned_data.get('text'),
+                image = check_image
+                )
+        else:
+            post = self.instance
+            post.text = self.cleaned_data.get("text")
+            post.image = check_image
+            post.save()
 
-        return None
+        return post

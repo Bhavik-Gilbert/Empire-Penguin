@@ -15,22 +15,7 @@
 <div class="clucker-box box">
     {% if feed_posts %}
         {% for post in feed_posts %}
-            <div class="post box">
-                <div class=box>
-                    {{post.author}}  
-                </div>
-                
-                {% if not post.image is None and not post.image == "" %}
-                    <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
-                {% endif %}
-                
-                <div class=box>
-                    {{post.text}}  
-                </div>
-                <div class=box>
-                    <p>{{post.created_at}}</p> 
-                </div>
-            </div>
+            {% include 'partials/display_posts.html'%}
         {% endfor %}
     {% else %}
     You have no posts to view, invite some of your friends to post to view their posts here

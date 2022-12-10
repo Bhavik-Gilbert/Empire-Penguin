@@ -62,7 +62,7 @@ class NewPostTest(TestCase):
         response = self.client.post(self.url, self.data, follow=True)
         user_count_after = Post.objects.count()
         self.assertEqual(user_count_after, user_count_before)
-        self.assertTemplateUsed(response, 'new_post.html')
+        self.assertTemplateUsed(response, 'post.html')
 
     def test_cannot_create_post_for_other_user(self):
         self.client.login(username='johndoe', password='Password123')

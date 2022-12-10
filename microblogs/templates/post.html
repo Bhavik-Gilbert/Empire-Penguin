@@ -7,7 +7,7 @@
 <div class="title box_down">Post</div>
 
 <div class="clucker-box">
-    <form action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
         <input type="submit" value="Fly" class="button">

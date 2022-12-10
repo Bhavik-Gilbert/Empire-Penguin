@@ -1,6 +1,7 @@
 .penguin_scene {
     max-width: 100vw;
     padding: 0;
+    cursor: var(--grab);
 }
 
 .full_size {
