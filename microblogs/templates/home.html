@@ -4,13 +4,13 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<div class="clucker-box">
-  <h1>Welcome to the <strong>Penguin Empire</strong></h1>
-  <p>The place for raising flippers and sharing your unique calls</p>
+  <div class="clucker-box">
+    <h1>Welcome to the <strong>Penguin Empire</strong></h1>
+    <p>The place for raising flippers and sharing your unique calls</p>
 
-  <a href='{% url 'signup' %}' class="button-alt">Sign up</a>
-  <a href='{% url 'login' %}' class="button-alt">Login</a>
-</div>
+    <a href='{% url 'signup' %}' class="button-alt">Sign up</a>
+    <a href='{% url 'login' %}' class="button-alt">Login</a>
+  </div>
 
   <div id="home_penguin" class="penguin_scene full_size"></div>
   <script>penguin_scene(window.innerWidth, window.innerHeight, "home_penguin", true);</script>

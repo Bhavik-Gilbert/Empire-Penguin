@@ -4,14 +4,14 @@
 
 {% block body %}
 
-<div class="title box_down">Post</div>
+    <div class="title box_down">Post</div>
 
-<div class="clucker-box">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Fly" class="button">
-    </form>
-</div>
+    <div class="clucker-box">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'partials/bootstrap_form.html' with form=form %}
+            <input type="submit" value="Fly" class="button">
+        </form>
+    </div>
 
 {% endblock %}

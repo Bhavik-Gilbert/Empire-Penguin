@@ -1,6 +1,6 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from django.contrib import messages
 
 from ..forms import LogInForm
@@ -28,6 +28,11 @@ def login_view(request: HttpRequest) -> HttpResponse:
     form: LogInForm = LogInForm()
 
     # dealing with getting next redirect for required login page
-    next: str = request.GET.get('next') or ''
+    next_page: str = request.GET.get('next') or ''
 
-    return render(request, 'login.html', {'form': form, 'next':next})
+    return render(request, 'login.html', {'form': form, 'next':next_page})
+
+
+def logout_redirect(request: HttpRequest) -> HttpResponseRedirect:
+    logout(request)
+    return redirect('home')

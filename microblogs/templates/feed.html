@@ -3,22 +3,22 @@
 {% block title %}Feed{% endblock %}
 
 {% block body %}
-<div class="clucker-box">
-    <h1>Welcome to the <strong>Penguin Empire</strong></h1>
-    <p>The place for raising flippers and sharing your unique calls</p>
-    
-    <a href='{% url 'logout' %}' class="button-alt">Logout</a>
-</div>
+    <div class="clucker-box">
+        <h1>Welcome to the <strong>Penguin Empire</strong></h1>
+        <p>The place for raising flippers and sharing your unique calls</p>
+        
+        <a href='{% url 'logout' %}' class="button-alt">Logout</a>
+    </div>
 
-<div class="title box">Feed</div>
+    <div class="title box">Feed</div>
 
-<div class="clucker-box box">
-    {% if feed_posts %}
-        {% for post in feed_posts %}
-            {% include 'partials/display_posts.html'%}
-        {% endfor %}
-    {% else %}
-    You have no posts to view, invite some of your friends to post to view their posts here
-    {% endif %}
-</div>
+    <div class="clucker-box box">
+        {% if feed_posts %}
+            {% for post in feed_posts %}
+                {% include 'partials/display_posts.html'%}
+            {% endfor %}
+        {% else %}
+        You have no posts to view, invite some of your friends to post to view their posts here
+        {% endif %}
+    </div>
 {% endblock %}
