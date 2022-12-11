@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="row box_down">
+    <div class="col-md-auto">
+    {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
+        <img src="{% static 'favicon.ico' %}" class="profile_pic">
+    {% else %}
+        <img src="data:image/png;base64,{{account_user.profile_pic}}" class="profile_pic">
+    {% endif %}
+    </div>
+
+
+    <div class="col">
+        <div class="title row">@{{account_user.username}}</div>
+        <div class="row">
+            <a class="link" href="{% url 'find_followers' username=account_user.username %}"><h4>Followers: {{account_user.get_followers|length}}</strong></h4></a>
+        </div>
+        <div class="row">
+            {% if user == account_user %}
+            {% elif user in account_user.get_followers %}
+            <a class="button" href="{% url 'unfollow' page=page username=account_user.username %}">Unfollow</a>
+            {% else %}
+            <a class="button-alt" href="{% url 'follow' page=page username=account_user.username %}">Follow</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

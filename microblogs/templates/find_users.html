@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Feed{% endblock %}
+{% block title %}Accounts{% endblock %}
 
 {% block body %}
+    <div class="title box_down">Accounts</div>
+
+    <form method="post" class="box" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'partials/bootstrap_form.html' with form=form %}
+        <input type="submit" value="Search" class="button">
+    </form>
+    
+    <br><br>
+
+    <div class="box">
+        {% for account_user in account_list %}
+                <div class="clucker-box box_down " align="left">
+                    {% include 'partials/display_account.html'%}
+                    
+                    <div class="row">
+                        <a class="button-alt" href="{% url 'profile' username=account_user %}" align="left">Visit Profile</a>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -16,7 +16,7 @@
 .navbar .nav ul li {
     height: 100%;
     transition:var(--ease);
-    padding: 1.5em 1.5em;
+    padding: 1.8em 1.5em;
     border-radius: 0.5em;
     display: inline;
 }

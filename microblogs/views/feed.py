@@ -2,16 +2,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 
-from ..models import User, Following
+from ..models import User, Post
 
 @login_required
 def feed_view(request: HttpRequest) -> HttpResponse:
     current_user: User = request.user
-    feed_posts = []
+    feed_posts: list[Post] = []
 
-    for following_id in current_user.get_following():
-        following = User.objects.get(id=following_id)
-        feed_posts += following.get_posts()
+    for user in current_user.get_following():
+        feed_posts += user.get_posts()
     
     feed_posts.sort(key=lambda x: x.created_at, reverse=True)
 

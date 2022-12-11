@@ -47,10 +47,22 @@ class User(AbstractUser):
         return Post.objects.filter(author=self)
     
     def get_followers(self):
-        return Following.objects.filter(following=self).values_list('follower', flat=True)
+        followers_id: list[int] = Following.objects.filter(following=self).values_list('follower', flat=True)
+        followers: list[User] = []
+
+        for user_id in followers_id:
+            followers.append(User.objects.get(id=user_id))
+        
+        return followers
 
     def get_following(self):
-        return Following.objects.filter(follower=self).values_list('following', flat=True)
+        following_id = Following.objects.filter(follower=self).values_list('following', flat=True)
+        following: list[User] = []
+
+        for user_id in following_id:
+            following.append(User.objects.get(id=user_id))
+        
+        return following
 
 
 class Post(models.Model):

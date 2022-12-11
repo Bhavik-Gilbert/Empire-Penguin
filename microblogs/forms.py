@@ -1,4 +1,4 @@
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinLengthValidator
 from django import forms
 from .models import User, Post
 import base64
@@ -90,3 +90,8 @@ class PostForm(forms.ModelForm):
             post.save()
 
         return post
+    
+class SearchUserForm(forms.Form):
+    """ Form to ask user for post text.The post author must be by the post creator."""
+
+    search = forms.CharField(label='', required=False)

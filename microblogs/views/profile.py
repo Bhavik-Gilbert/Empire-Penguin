@@ -13,7 +13,7 @@ def profile_view(request: HttpRequest, username: str) -> HttpResponse:
 
     account_user = User.objects.get(username=username)
     
-    return render(request, "profile.html", {'account_user': account_user})
+    return render(request, "profile.html", {'account_user': account_user, 'page': 'profile'})
 
 
 @login_required
@@ -30,7 +30,10 @@ def follow_redirect(request: HttpRequest, page: str ,username: str) -> HttpRespo
                 following = account_user
             )
 
-    return redirect(page, username) or redirect(page)
+    try:
+        return redirect(page, username) 
+    except:
+        return redirect(page)
 
 @login_required
 def unfollow_redirect(request: HttpRequest, page: str ,username: str) -> HttpResponse:
@@ -39,8 +42,11 @@ def unfollow_redirect(request: HttpRequest, page: str ,username: str) -> HttpRes
 
     if len(account_user) == 1: # Checks there's only one user
         account_user = User.objects.get(username=username)
-        find_unfollow = Following.objects.filter(follower=current_user, following=account_user)
+        find_unfollow: list[Following] = Following.objects.filter(follower=current_user, following=account_user)
         if len(find_unfollow) > 0: # Deletes all records of following
             find_unfollow.delete()
 
-    return redirect(page, username) or redirect(page)
+    try:
+        return redirect(page, username) 
+    except:
+        return redirect(page)
