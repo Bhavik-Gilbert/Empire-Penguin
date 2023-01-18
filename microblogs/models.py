@@ -12,11 +12,9 @@ def wrapper(instance, filename):
     # get filename
     if instance.pk:
         filename = '{}.{}'.format(instance.pk, ext)
-        print(filename,1)
     else:
         # set filename as random string
         filename = '{}.{}'.format(''.join(random.choice(string.ascii_letters) for i in range(48)), ext)
-        print(filename,2)
     # return the whole path to the file
     return os.path.join('static/media_files', filename)
 
