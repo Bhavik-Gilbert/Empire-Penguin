@@ -12,7 +12,7 @@ class LogInForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'bio']
+        fields = ['first_name', 'last_name', 'username', 'email', 'bio', 'profile_pic']
         widgets = { 'bio': forms.Textarea() }
     
     new_password = forms.CharField(
@@ -43,12 +43,13 @@ class SignUpForm(forms.ModelForm):
         super().save(commit=False)
 
         user = User.objects.create_user(
-            self.cleaned_data.get('username'),
+            username = self.cleaned_data.get('username'),
             first_name = self.cleaned_data.get('first_name'),
             last_name = self.cleaned_data.get('last_name'),
             email = self.cleaned_data.get('email'),
             bio = self.cleaned_data.get('bio'),
-            password = self.cleaned_data.get('new_password'),
+            profile_pic = self.cleaned_data.get('profile_pic'),
+            password = self.cleaned_data.get('new_password')
         )
 
         return user
@@ -60,33 +61,24 @@ class PostForm(forms.ModelForm):
         """Form options."""
 
         model = Post
-        fields = ['text']
+        fields = ['text', 'image']
         widgets = {
             'text': forms.Textarea(),
         }
     
-    image = forms.ImageField(required=False)
-    
     def save(self, user, instance=None):
         super().save(commit=False)
-
-        check_image = self.cleaned_data.get('image')
-        if check_image is not None:
-            image = Image.open(io.BytesIO(check_image.file.read()))
-            buffered = io.BytesIO()
-            image.save(buffered, format="PNG")
-            check_image = base64.b64encode(buffered.getvalue()).decode('ascii')
 
         if instance is None:
             post = Post.objects.create(
                 author = user, 
                 text = self.cleaned_data.get('text'),
-                image = check_image
+                image = self.cleaned_data.get('image')
                 )
         else:
             post = self.instance
             post.text = self.cleaned_data.get("text")
-            post.image = check_image
+            post.image = self.cleaned_data.get('image')
             post.save()
 
         return post

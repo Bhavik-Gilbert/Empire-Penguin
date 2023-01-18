@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from microblogs import views
 
@@ -33,4 +35,4 @@ urlpatterns = [
     re_path(r'follow/(?P<page>\w+)/(?P<username>\w+)/$', views.follow_redirect, name='follow'),
     re_path(r'unfollow/(?P<page>\w+)/(?P<username>\w+)/$', views.unfollow_redirect, name='unfollow'),
     re_path(r'find_followers/(?P<username>\w+)/$', views.find_followers_view, name='find_followers'),
-]
+] 

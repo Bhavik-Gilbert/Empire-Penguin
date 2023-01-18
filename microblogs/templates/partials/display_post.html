@@ -6,7 +6,7 @@
             {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
                 <img src="{% static 'favicon.ico' %}" class="profile_pic_small">
             {% else %}
-                <img src="data:image/png;base64,{{post.author.profile_pic}}" class="profile_pic_small">
+                <img src="{% static '' %}../{{post.author.profile_pic}}" class="profile_pic_small">
             {% endif %}
         </a>
         <a class="col-md-auto d-flex align-items-center link" align="left" href="{% url 'profile' username=post.author %}">
@@ -15,8 +15,9 @@
     </div>
     
     {% if not post.image is None and not post.image == "" %}
+    {{post.image}}
         <div class="row box">
-            <img class="post_image" src="data:image/png;base64,{{post.image}}"/>
+            <img class="post_image" src="{% static '' %}../{{post.image}}"/>
         </div>
     {% endif %}
     
