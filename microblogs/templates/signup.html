@@ -5,7 +5,7 @@
 {% block body %}
     <div class="title box_down">Signup</div>
 
-    <form method="post" class="clucker-box">
+    <form method="post" class="clucker-box" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
         <input type="submit" value="Sign up" class="button">

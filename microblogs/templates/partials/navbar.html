@@ -22,12 +22,12 @@
         </ul>
     </div>
 
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <div id="dropdown" class="btn-group dropstart">
-        {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
+        {% if request.user.profile_pic == "False" or request.user.profile_pic == "" or request.user.profile_pic is None %}
             <img src="{% static 'favicon.ico' %}" class="profile_pic_small" data-bs-toggle="dropdown" aria-expanded="false">
         {% else %}
-            <img src="data:image/png;base64,{{account_user.profile_pic}}" class="profile_pic_small" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{% static '' %}../{{request.user.profile_pic}}" class="profile_pic_small" data-bs-toggle="dropdown" aria-expanded="false">
         {% endif %}
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'profile' username=user %}">Profile</a></li>

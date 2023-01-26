@@ -278,3 +278,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Media files
+*/media_files

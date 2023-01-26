@@ -3,7 +3,7 @@
 <div class="post box" align="center">
     <div class="row">
         <a class="col-2 link" href="{% url 'profile' username=post.author %}">
-            {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
+            {% if account_user.profile_pic == "False" or account_user.profile_pic == "" or account_user.profile_pic is None %}
                 <img src="{% static 'favicon.ico' %}" class="profile_pic_small">
             {% else %}
                 <img src="{% static '' %}../{{post.author.profile_pic}}" class="profile_pic_small">
@@ -14,7 +14,7 @@
         </a>
     </div>
     
-    {% if not post.image is None and not post.image == "" %}
+    {% if not post.image is None and not post.image == "" and not post.image == "False" %}
         <div class="row box">
             <img class="post_image" src="{% static '' %}../{{post.image}}"/>
         </div>

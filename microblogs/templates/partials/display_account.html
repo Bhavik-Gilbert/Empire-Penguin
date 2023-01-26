@@ -2,10 +2,10 @@
 
 <div class="row box_down">
     <div class="col-md-auto">
-    {% if account_user.profile_pic is None or account_user.profile_pic == "" %}
+    {% if account_user.profile_pic == "False" or account_user.profile_pic == "" or account_user.profile_pic is None %}
         <img src="{% static 'favicon.ico' %}" class="profile_pic">
     {% else %}
-        <img src="data:image/png;base64,{{account_user.profile_pic}}" class="profile_pic">
+        <img src="{% static '' %}../{{account_user.profile_pic}}" class="profile_pic">
     {% endif %}
     </div>
 

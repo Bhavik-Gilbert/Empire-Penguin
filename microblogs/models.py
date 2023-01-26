@@ -2,19 +2,16 @@ from django.db import models
 from django.core.validators import RegexValidator, MinLengthValidator
 from django.contrib.auth.models import AbstractUser
 
+import datetime
 import random
 import string
 import os
 
 """Function to rename image files"""
-def wrapper(instance, filename):
+def get_random_filename(instance, filename):
     ext = filename.split('.')[-1]
-    # get filename
-    if instance.pk:
-        filename = '{}.{}'.format(instance.pk, ext)
-    else:
-        # set filename as random string
-        filename = '{}.{}'.format(''.join(random.choice(string.ascii_letters) for i in range(48)), ext)
+    # set filename as random string
+    filename = '{}.{}'.format(''.join(f"{(random.choice(string.ascii_letters) for i in range(48))}{datetime.datetime.now()}"), ext)
     # return the whole path to the file
     return os.path.join('static/media_files', filename)
 
@@ -31,7 +28,7 @@ class User(AbstractUser):
         )]
     )
     
-    profile_pic = models.ImageField(upload_to=wrapper, blank=True)
+    profile_pic = models.ImageField(upload_to=get_random_filename, blank=True)
 
     first_name = models.CharField(
         max_length=50,
@@ -92,7 +89,7 @@ class Post(models.Model):
         )]
         )
 
-    image = models.ImageField(upload_to=wrapper, blank=True)
+    image = models.ImageField(upload_to=get_random_filename, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
