@@ -15,7 +15,6 @@
     </div>
     
     {% if not post.image is None and not post.image == "" %}
-    {{post.image}}
         <div class="row box">
             <img class="post_image" src="{% static '' %}../{{post.image}}"/>
         </div>

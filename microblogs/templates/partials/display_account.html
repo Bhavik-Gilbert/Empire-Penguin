@@ -17,6 +17,7 @@
         </div>
         <div class="row">
             {% if user == account_user %}
+            <a class="button-alt" href="{% url 'edit_user_profile' %}">Edit Profile</a>
             {% elif user in account_user.get_followers %}
             <a class="button" href="{% url 'unfollow' page=page username=account_user.username %}">Unfollow</a>
             {% else %}

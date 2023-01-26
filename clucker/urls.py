@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
     path('signup/', views.signup_view, name='signup'),
+    path('edit_user_profile/', views.edit_user_profile_view, name='edit_user_profile'),
     path('feed/', views.feed_view, name='feed'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_redirect, name='logout'),
@@ -34,5 +35,5 @@ urlpatterns = [
     re_path(r'delete_post/(?P<pk>\d+)/(?P<username>\w+)/$', views.delete_post_redirect, name='delete_post'),
     re_path(r'follow/(?P<page>\w+)/(?P<username>\w+)/$', views.follow_redirect, name='follow'),
     re_path(r'unfollow/(?P<page>\w+)/(?P<username>\w+)/$', views.unfollow_redirect, name='unfollow'),
-    re_path(r'find_followers/(?P<username>\w+)/$', views.find_followers_view, name='find_followers'),
+    re_path(r'find_followers/(?P<username>\w+)/$', views.find_followers_view, name='find_followers')
 ] 

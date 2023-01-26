@@ -1,15 +1,18 @@
-from django.core.validators import RegexValidator, MinLengthValidator
+from django.core.validators import RegexValidator
+from django.contrib.auth import authenticate
 from django import forms
 from .models import User, Post
-import base64
-from PIL import Image
-import io
 
 class LogInForm(forms.Form):
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
 
 class SignUpForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs) -> None:
+        self.current_user: int = kwargs.get("instance") or None
+        super(SignUpForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'bio', 'profile_pic']
@@ -27,30 +30,53 @@ class SignUpForm(forms.ModelForm):
         ]
     )
     password_confirmation = forms.CharField(
-        label='Password Confirmation', 
+        label='Password Confirmation/ New Password', 
         widget=forms.PasswordInput()
     )
 
     def clean(self):
         super().clean()
-        new_password = self.cleaned_data.get('new_password')
-        password_confirmation = self.cleaned_data.get('password_confirmation')
 
-        if new_password != password_confirmation:
-            self.add_error('password_confirmation', 'Passwords do not match')
+        if self.current_user is None:
+            new_password = self.cleaned_data.get('new_password')
+            password_confirmation = self.cleaned_data.get('password_confirmation')
+
+            if new_password != password_confirmation:
+                self.add_error('password_confirmation', 'Passwords do not match')
+        else:
+            new_password: str = self.cleaned_data.get('new_password')
+            password_confirmation: str = self.cleaned_data.get('password_confirmation')
+
+            user = self.current_user
+            user_login: User = authenticate(username=user.username, password=new_password)
+            if user_login is None:
+                self.add_error('new_password', 'Could not authenticate, incorrect password')
+
 
     def save(self):
         super().save(commit=False)
 
-        user = User.objects.create_user(
-            username = self.cleaned_data.get('username'),
-            first_name = self.cleaned_data.get('first_name'),
-            last_name = self.cleaned_data.get('last_name'),
-            email = self.cleaned_data.get('email'),
-            bio = self.cleaned_data.get('bio'),
-            profile_pic = self.cleaned_data.get('profile_pic'),
-            password = self.cleaned_data.get('new_password')
-        )
+        if self.current_user is None:
+            user = User.objects.create_user(
+                username = self.cleaned_data.get('username'),
+                first_name = self.cleaned_data.get('first_name'),
+                last_name = self.cleaned_data.get('last_name'),
+                email = self.cleaned_data.get('email'),
+                bio = self.cleaned_data.get('bio'),
+                profile_pic = self.cleaned_data.get('profile_pic'),
+                password = self.cleaned_data.get('new_password')
+            )
+        else:
+            print(self.cleaned_data.get('profile_pic'))
+            user: User = self.current_user
+            user.username: str = self.cleaned_data.get('username')
+            user.first_name: str = self.cleaned_data.get('first_name')
+            user.last_name: str = self.cleaned_data.get('last_name')
+            user.email: str = self.cleaned_data.get('email')
+            user.bio: str = self.cleaned_data.get('bio')
+            user.profile_pic: forms.ImageField = self.cleaned_data.get('profile_pic')
+            user.set_password(self.cleaned_data.get('new_password'))
+            user.save()
 
         return user
     

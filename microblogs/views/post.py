@@ -19,6 +19,7 @@ def new_post_view(request: HttpRequest) -> HttpResponse:
 
     return render(request, 'post.html', {'form': form})
 
+@login_required
 def edit_post(request: HttpRequest, pk: int, username: str) -> HttpResponseRedirect:
     current_user: User = request.user
     post: Post = Post.objects.filter(id=pk)
@@ -37,6 +38,7 @@ def edit_post(request: HttpRequest, pk: int, username: str) -> HttpResponseRedir
 
     return render(request, 'post.html', {'form': form})
 
+@login_required
 def delete_post_redirect(request: HttpRequest, pk: int, username: str) -> HttpResponseRedirect:
     current_user: User = request.user
     post: Post = Post.objects.filter(id=pk)
