@@ -16,7 +16,7 @@ This project aims to produce an application that allows users to track their exp
 The project is called `clucker`.  It currently consists of a single app `microblogs` where all functionality resides.
 
 ## Deployed application
-This application has yet to be deployed
+The deployed version of the application can be found at: https://PenguinEmpire.pythonanywhere.com
 
 ## Installation instructions
 To install the software and use it in your local development environment, you must first set up and activate a local development environment.  From the root of the project:
