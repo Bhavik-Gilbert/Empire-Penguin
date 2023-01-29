@@ -12,7 +12,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/Bhavik-Gilbert/Empire-Penguin)
 
 ## About
-This project aims to produce an application that allows users to track their expenditures. The expenditure can belong to different categories. The user should be able to create, edit and delete these categories. When adding new spending, there should be a functionality to add a title, a short description, and an optional photo or file for the receipt. Moreover, the user should be able to set spending limits for each category as well as for the overall spending in a selected timeframe. When approaching and exceeding the set limits, the user should get a warning from the system. The app should motivate the user to stick to the set goals through gamification. Lastly, the user should be able to get reports and charts for their spending in a given timeframe.
+Social media application where users can post text and images while having fun interactions with virtual penguins throughout the site.
 
 ## Project structure
 The project is called `clucker`.  It currently consists of a single app `microblogs` where all functionality resides.
