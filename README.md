@@ -1,11 +1,13 @@
 # Empire Penguin
 
 ## Badges
+![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2FPenguinempire.pythonanywhere.com)
+
 ![GitHub last commit](https://img.shields.io/github/last-commit/Bhavik-Gilbert/Empire-Penguin)
 ![GitHub contributors](https://img.shields.io/github/contributors/Bhavik-Gilbert/Empire-Penguin)
-![Lines of code](https://img.shields.io/tokei/lines/github/Bhavik-Gilbert/Empire-Penguin)
-![GitHub repo size](https://img.shields.io/github/repo-size/Bhavik-Gilbert/Empire-Penguin)    
 
+![Lines of code](https://img.shields.io/tokei/lines/github/Bhavik-Gilbert/Empire-Penguin)
+![GitHub repo size](https://img.shields.io/github/repo-size/Bhavik-Gilbert/Empire-Penguin)
 ![GitHub top language](https://img.shields.io/github/languages/top/Bhavik-Gilbert/Empire-Penguin)
 ![GitHub language count](https://img.shields.io/github/languages/count/Bhavik-Gilbert/Empire-Penguin)
 
