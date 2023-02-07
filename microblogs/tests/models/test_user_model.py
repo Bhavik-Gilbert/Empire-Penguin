@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 from microblogs.models import User
 
 # Create your tests here.
+
+
 class UserModelTestCase(TestCase):
     fixtures = [
         'microblogs/tests/fixtures/default_user.json',
@@ -16,14 +18,13 @@ class UserModelTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.get(username="janedoe")
 
-
     def test_valid_user(self):
         self._assert_user_is_valid()
 
     def test_username_cannot_be_blank(self):
         self.user.username = ''
         self._assert_user_is_invalid()
-    
+
     def test_username_can_be_30_characters_long(self):
         self.user.username = 'a' + 'x' * 29
         self._assert_user_is_valid()
@@ -40,11 +41,11 @@ class UserModelTestCase(TestCase):
     def test_username_must_conatin_only_alphanumericals(self):
         self.user.username = 'john@doe'
         self._assert_user_is_invalid()
-    
+
     def test_username_must_conatin_atleast_3_alphanumericals(self):
         self.user.username = 'jo'
         self._assert_user_is_invalid()
-    
+
     def test_username_may_contain_numbers(self):
         self.user.username = 'j0hndoe2'
         self._assert_user_is_valid()
@@ -57,7 +58,7 @@ class UserModelTestCase(TestCase):
         user = User.objects.get(username="johndoe")
         self.user.first_name = 'Jane'
         self._assert_user_is_valid()
-    
+
     def test_firstname_can_be_50_characters_long(self):
         self.user.first_name = 'x' * 50
         self._assert_user_is_valid()
@@ -65,7 +66,7 @@ class UserModelTestCase(TestCase):
     def test_firstname_cannot_be_over_50_characters_long(self):
         self.user.first_name = 'x' * 51
         self._assert_user_is_invalid()
-    
+
     def test_lastname_must_not_be_blank(self):
         self.user.last_name = ''
         self._assert_user_is_invalid()
@@ -74,7 +75,7 @@ class UserModelTestCase(TestCase):
         user = User.objects.get(username="johndoe")
         self.user.last_name = 'Doe'
         self._assert_user_is_valid()
-    
+
     def test_lastname_can_be_50_characters_long(self):
         self.user.last_name = 'x' * 50
         self._assert_user_is_valid()
@@ -82,33 +83,33 @@ class UserModelTestCase(TestCase):
     def test_lastname_cannot_be_over_50_characters_long(self):
         self.user.last_name = 'x' * 51
         self._assert_user_is_invalid()
-    
+
     def test_email_must_be_unique(self):
         user = User.objects.get(username="johndoe")
-        self.user.email ='johndoe@example.org'
+        self.user.email = 'johndoe@example.org'
         self._assert_user_is_invalid()
 
     def test_email_cannot_be_blank(self):
-        self.user.email=''
+        self.user.email = ''
         self._assert_user_is_invalid()
-    
+
     def test_email_must_have_at_in_the_middle(self):
-        self.user.email='janedoe.com'
+        self.user.email = 'janedoe.com'
         self._assert_user_is_invalid()
-    
+
     def test_email_must_have_dot_at_the_end(self):
-        self.user.email='janedoe@exampleorg'
+        self.user.email = 'janedoe@exampleorg'
         self._assert_user_is_invalid()
-    
+
     def test_bio_can_be_blank(self):
-        self.user.bio=''
+        self.user.bio = ''
         self._assert_user_is_valid()
 
     def test_bio_may_already_exist(self):
         user = User.objects.get(username="johndoe")
-        self.user.bio='hi'
+        self.user.bio = 'hi'
         self._assert_user_is_valid()
-    
+
     def test_bio_can_be_520_characters_long(self):
         self.user.bio = 'x' * 520
         self._assert_user_is_valid()

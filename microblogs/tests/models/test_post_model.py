@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 from microblogs.models import Post, User
 
+
 class PostTest(TestCase):
     def setUp(self):
         super(TestCase, self).setUp()

@@ -7,6 +7,7 @@ from ..forms import LogInForm
 from ..models import User
 from ..helpers import login_prohibited
 
+
 @login_prohibited
 def login_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
@@ -23,14 +24,17 @@ def login_view(request: HttpRequest) -> HttpResponse:
                 return redirect(redirect_url)
 
         # Add error messages
-        messages.add_message(request, messages.ERROR, "The username or password is incorrect") 
+        messages.add_message(
+            request,
+            messages.ERROR,
+            "The username or password is incorrect")
 
     form: LogInForm = LogInForm()
 
     # dealing with getting next redirect for required login page
     next_page: str = request.GET.get('next') or ''
 
-    return render(request, 'login.html', {'form': form, 'next':next_page})
+    return render(request, 'login.html', {'form': form, 'next': next_page})
 
 
 def logout_redirect(request: HttpRequest) -> HttpResponseRedirect:

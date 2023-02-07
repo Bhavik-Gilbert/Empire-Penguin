@@ -143,6 +143,6 @@ REDIRECT_URL_WHEN_LOGGED_IN = 'feed'
 
 # Message level tags should use bootstrap terms
 MESSAGE_TAGS = {
-	message_constants.DEBUG: 'dark',
-	message_constants.ERROR: 'danger'
+    message_constants.DEBUG: 'dark',
+    message_constants.ERROR: 'danger'
 }

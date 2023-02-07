@@ -8,6 +8,7 @@ from microblogs.models import User
 from microblogs.forms import SignUpForm
 from ..helpers import LogInTester
 
+
 class SignupViewTestCase(TestCase, LogInTester):
 
     fixtures = ['microblogs/tests/fixtures/default_user.json']
@@ -15,13 +16,13 @@ class SignupViewTestCase(TestCase, LogInTester):
     def setUp(self):
         self.url = reverse('signup')
         self.form_input = {
-            'first_name':'John',
-            'last_name':'Doe',
-            'username':'johndoe',
-            'email':'johndoe@example.org',
-            'bio':'hi',
-            'new_password':'Password123',
-            'password_confirmation':'Password123'
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'username': 'johndoe',
+            'email': 'johndoe@example.org',
+            'bio': 'hi',
+            'new_password': 'Password123',
+            'password_confirmation': 'Password123'
         }
         self.user = User.objects.get(username="janedoe")
 
@@ -35,12 +36,16 @@ class SignupViewTestCase(TestCase, LogInTester):
         form = response.context['form']
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertFalse(form.is_bound)
-    
+
     def test_get_signup_redirects_when_logged_in(self):
         self.client.login(username=self.user.username, password="Password123")
         response = self.client.get(self.url, follow=True)
         response_url = reverse('feed')
-        self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
+        self.assertRedirects(
+            response,
+            response_url,
+            status_code=302,
+            target_status_code=200)
         self.assertTemplateUsed(response, 'feed.html')
 
     def test_unsuccessful_signup(self):
@@ -55,14 +60,18 @@ class SignupViewTestCase(TestCase, LogInTester):
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertTrue(form.is_bound)
         self.assertFalse(self._is_logged_in())
-    
+
     def test_successful_signup(self):
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input, follow=True)
         after_count = User.objects.count()
         self.assertEqual(before_count + 1, after_count)
         response_url = reverse('feed')
-        self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
+        self.assertRedirects(
+            response,
+            response_url,
+            status_code=302,
+            target_status_code=200)
         self.assertTemplateUsed(response, 'feed.html')
         user = User.objects.get(username='janedoe')
         self.assertEqual(user.first_name, 'Jane')
@@ -80,5 +89,9 @@ class SignupViewTestCase(TestCase, LogInTester):
         self.assertEqual(before_count, after_count)
         response = self.client.post(self.url, self.form_input, follow=True)
         response_url = reverse('feed')
-        self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
+        self.assertRedirects(
+            response,
+            response_url,
+            status_code=302,
+            target_status_code=200)
         self.assertTemplateUsed(response, 'feed.html')

@@ -18,10 +18,10 @@ class NewPostTest(TestCase):
             bio='The quick brown fox jumps over the lazy dog.'
         )
         self.url = reverse('new_post')
-        self.data = { 'text': 'The quick brown fox jumps over the lazy dog.' }
+        self.data = {'text': 'The quick brown fox jumps over the lazy dog.'}
 
     def test_new_post_url(self):
-        self.assertEqual(self.url,'/new_post/')
+        self.assertEqual(self.url, '/new_post/')
 
     def test_get_new_post(self):
         self.client.login(username=self.user.username, password="Password123")
@@ -35,7 +35,11 @@ class NewPostTest(TestCase):
         user_count_before = Post.objects.count()
         redirect_url = reverse_with_next('login', self.url)
         response = self.client.get(self.url)
-        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
+        self.assertRedirects(
+            response,
+            redirect_url,
+            status_code=302,
+            target_status_code=200)
         user_count_after = Post.objects.count()
         self.assertEqual(user_count_after, user_count_before)
 
@@ -44,7 +48,7 @@ class NewPostTest(TestCase):
         user_count_before = Post.objects.count()
         response = self.client.post(self.url, self.data, follow=True)
         user_count_after = Post.objects.count()
-        self.assertEqual(user_count_after, user_count_before+1)
+        self.assertEqual(user_count_after, user_count_before + 1)
         new_post = Post.objects.latest('created_at')
         self.assertEqual(self.user, new_post.author)
         response_url = reverse('feed')
@@ -78,6 +82,6 @@ class NewPostTest(TestCase):
         user_count_before = Post.objects.count()
         response = self.client.post(self.url, self.data, follow=True)
         user_count_after = Post.objects.count()
-        self.assertEqual(user_count_after, user_count_before+1)
+        self.assertEqual(user_count_after, user_count_before + 1)
         new_post = Post.objects.latest('created_at')
         self.assertEqual(self.user, new_post.author)

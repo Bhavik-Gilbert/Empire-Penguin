@@ -6,6 +6,7 @@ from ..models import User
 from ..forms import SearchUserForm
 from ..helpers import search_users
 
+
 @login_required
 def find_users_view(request: HttpRequest) -> HttpResponse:
     current_user: User = request.user
@@ -17,7 +18,9 @@ def find_users_view(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             account_list = search_users(account_list, form)
 
-    return render(request, "find_users.html", {'form': form, 'account_list': account_list, 'page': 'find_users'})
+    return render(request, "find_users.html", {
+                  'form': form, 'account_list': account_list, 'page': 'find_users'})
+
 
 def find_followers_view(request: HttpRequest, username: str) -> HttpResponse:
     account_user: list[User] = User.objects.filter(username=username)
@@ -34,8 +37,10 @@ def find_followers_view(request: HttpRequest, username: str) -> HttpResponse:
                 account_list = []
                 for user in follower_list:
                     user_account = User.objects.filter(id=user.id)
-                    account_list = [*account_list, *search_users(user_account, form)]
+                    account_list = [*account_list, *
+                                    search_users(user_account, form)]
 
-        return render(request, "find_users.html", {'form': form, 'account_list': account_list, 'page': 'find_followers'})
-    
+        return render(request, "find_users.html", {
+                      'form': form, 'account_list': account_list, 'page': 'find_followers'})
+
     return redirect('feed')

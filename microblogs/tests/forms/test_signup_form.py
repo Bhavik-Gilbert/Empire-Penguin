@@ -7,16 +7,18 @@ from microblogs.forms import SignUpForm
 from microblogs.models import User
 
 # Create your tests here.
+
+
 class SignUpFormTesCase(TestCase):
     def setUp(self):
         self.form_input = {
-            'first_name':'Jane',
-            'last_name':'Doe',
-            'username':'janedoe',
-            'email':'janedoe@example.org',
-            'bio':'hi',
-            'new_password':'Password123',
-            'password_confirmation':'Password123'
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'username': 'janedoe',
+            'email': 'janedoe@example.org',
+            'bio': 'hi',
+            'new_password': 'Password123',
+            'password_confirmation': 'Password123'
         }
 
     def test_valid_signup_form(self):
@@ -37,13 +39,16 @@ class SignUpFormTesCase(TestCase):
         self.assertTrue(isinstance(new_password_widget, forms.PasswordInput))
         self.assertIn('password_confirmation', form.fields)
         password_confirmation_widget = form.fields['password_confirmation'].widget
-        self.assertTrue(isinstance(password_confirmation_widget, forms.PasswordInput))
+        self.assertTrue(
+            isinstance(
+                password_confirmation_widget,
+                forms.PasswordInput))
 
     def test_form_uses_valid_model(self):
         self.form_input['username'] = 'b'
         form = SignUpForm(data=self.form_input)
         self.assertFalse(form.is_valid())
-    
+
     def test_password_must_contain_uppercase_character(self):
         self.form_input['new_password'] = 'password123'
         self.form_input['password_confirmation'] = 'password123'
@@ -61,13 +66,13 @@ class SignUpFormTesCase(TestCase):
         self.form_input['password_confirmation'] = 'Passwordabc'
         form = SignUpForm(data=self.form_input)
         self.assertFalse(form.is_valid())
-    
+
     def test_new_pasword_and_password_confirmation_identical(self):
         self.form_input['new_password'] = 'Password123'
         self.form_input['password_confirmation'] = 'Password12'
         form = SignUpForm(data=self.form_input)
         self.assertFalse(form.is_valid())
-    
+
     def test_form_must_save_correctly(self):
         form = SignUpForm(data=self.form_input)
         before_count = User.objects.count()

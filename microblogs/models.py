@@ -8,18 +8,22 @@ import string
 import os
 
 """Function to rename image files"""
+
+
 def get_random_filename(instance, filename):
     ext = filename.split('.')[-1]
     # set filename as random string
-    filename = '{}.{}'.format(''.join(f"{(random.choice(string.ascii_letters) for i in range(48))}{datetime.datetime.now()}"), ext)
+    filename = '{}.{}'.format(''.join(
+        f"{(random.choice(string.ascii_letters) for i in range(48))}{datetime.datetime.now()}"), ext)
     # return the whole path to the file
     return os.path.join('static/media_files', filename)
+
 
 class User(AbstractUser):
     """Users in microblogs"""
 
     username = models.CharField(
-        max_length=30, 
+        max_length=30,
         unique=True,
         # Custom validator object
         validators=[RegexValidator(
@@ -27,7 +31,7 @@ class User(AbstractUser):
             message='Username must consist of at least three alphanumericals'
         )]
     )
-    
+
     profile_pic = models.ImageField(upload_to=get_random_filename, blank=True)
 
     first_name = models.CharField(
@@ -55,27 +59,31 @@ class User(AbstractUser):
 
     def __str__(self):
         return str(self.username)
-     
+
     def get_posts(self):
         return Post.objects.filter(author=self)
-    
+
     def get_followers(self):
-        followers_id: list[int] = Following.objects.filter(following=self).values_list('follower', flat=True)
+        followers_id: list[int] = Following.objects.filter(
+            following=self).values_list('follower', flat=True)
         followers: list[User] = []
 
         for user_id in followers_id:
             followers.append(User.objects.get(id=user_id))
-        
+
         return followers
 
     def get_following(self):
-        following_id = Following.objects.filter(follower=self).values_list('following', flat=True)
+        following_id = Following.objects.filter(
+            follower=self).values_list(
+            'following', flat=True)
         following: list[User] = []
 
         for user_id in following_id:
             following.append(User.objects.get(id=user_id))
-        
+
         return following
+
 
 class Post(models.Model):
     """Posts by users in their microblogs"""
@@ -87,7 +95,7 @@ class Post(models.Model):
             limit_value=1,
             message="Why would you want to post an empty message"
         )]
-        )
+    )
 
     image = models.ImageField(upload_to=get_random_filename, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -100,5 +108,11 @@ class Post(models.Model):
 
 class Following(models.Model):
     """Holds data of who Users follow"""
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower') # User who is following other user
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') # User they are following
+    follower = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='follower')  # User who is following other user
+    following = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='following')  # User they are following
